@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Cpp-Taskflow</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    
+    <script src="https://use.fontawesome.com/539f0980a5.js"></script>
+    
+    <!-- vis.js graph drawing -->
+    <link href="css/vis.min.css" rel="stylesheet" type="text/css"/>
+    <script src="js/vis.min.js"></script>
+  
+  <script type="text/javascript"> 
+ function submit() {
+   var content = document.getElementById('code_area').innerText;
+   document.getElementById('flow_graph').style.display = "none";
+   var xhr = new XMLHttpRequest();
+   xhr.onreadystatechange = function () {
+     // readyState = 4 means the post operation is complete.
+     if (xhr.readyState === 4) {
+       // extract the image in response sent by backend
+       var uInt8Array = new Uint8Array(this.response);
+       var i = uInt8Array.length;
+       var binaryString = new Array(i);
+       while (i--) {
+         binaryString[i] = String.fromCharCode(uInt8Array[i]);
+       }
+       var data = binaryString.join('');
+       var base64 = window.btoa(data);
+       document.getElementById('flow_graph').class = "animate-bottom";
+       document.getElementById('flow_graph').style = "border: 0px; background:none";
+       // Replace the old image by new image
+       document.getElementById("flow_graph").src="data:image/png;base64,"+base64;
+     }
+   }
+   // Send a post request to backend
+   xhr.open('post', 'http://localhost:3000', true);
+   xhr.responseType = 'arraybuffer';
+   xhr.setRequestHeader('Content-Type', 'text/plain');
+   xhr.send(content);
+ }
+</script>
+    
+    <!-- customized css -->
+    <link rel="stylesheet" href="css/custom.css">
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h1>Cpp-Taskflow</h1>
+          <h3>Modern C++ Parallel Task Programming</h3>
+          <p><i class="fa fa-github"></i><a href="https://github.com/cpp-taskflow/cpp-taskflow">https://github.com/cpp-taskflow</a></p>
+          <p><small>Presented by <a href="https://twhuang.ece.illinois.edu/">Tsung-Wei Huang</a></small></p>
+        </section>
+        
+<section>
+  <p>How can we make it easier for C++ developers to quickly write efficient parallel programs?</p>
+</section>
+
+<section>
+  <h2>Want Parallel Code</h2>
+  <ul>
+    <li>Simple</li>
+    <li>Expressive</li>
+    <li>Transparent</li>
+    <li>Performant</li>
+    <li>Productive</li>
+  </ul>
+</section>
+
+<section>
+  <h2>It's NOT Easy Though ...</h2>
+  <ol>
+    <li>Task Dependencies</li>
+    <li>Data Race</li>
+    <li>Concurrency Controls</li>
+    <li>Thread Contention</li>
+    <li>Debugging</li>
+    <li>...</li>
+  </ol>
+</section>
+
+
+<section>
+<h2>A Homegrown Example</h2>
+<img data-src="image/kitchen_flow.png", style="max-width: 400px">
+</section>
+
+
+<section>
+<h2>C++ Thread</h2>
+<pre><code class="language-cpp stretch" contenteditable=true>std::atomic_int garnish_ready{0}; // dependency variable
+std::atomic_int meat_ready{0};    // dependency variable
+std::atomic_int plating_ready{0}; // dependency variable
+std::thread cook1 ([&] () { 
+  garnish = cook_garnish(); garnish_ready = 1; 
+});
+std::thread cook2 ([&] () { 
+  garnish = cook_meat(); meat_ready = 1; 
+});
+std::thread chief ([&] () {
+  while(!garnish_ready && !meat_ready);    // spinning
+  plates = plating(garnish, meat); plating_ready = 1;
+}); 
+std::thread waiter1 ([&] () {
+  while(!plating_ready); serve(plates[0]); // spinning
+});
+std::thread waiter2 ([&] () {
+  while(!plating_ready); serve(plates[1]); // spinning
+});
+</code></pre>
+<span class="fragment current-only" data-code-focus="4,7,10,14,17"></span>
+<span class="fragment current-only" data-code-focus="1,2,3"></span>
+<span class="fragment current-only" data-code-focus="11,15,18"></span>
+</section>
+
+<section>
+<h2>OpenMP</h2>
+<pre><code class="language-cpp stretch" contenteditable=true>#pragma omp parallel 
+{
+  #pragma omp single 
+  {
+    int c1c, c2c, cw1, cw2;
+    #pragma omp task depend(out:c1c)
+    garnish = cook_garnish();
+    #pragma omp task depend(out:c2c)
+    meat = cook_meat();
+    #pragma omp task depend(in:c1c,c2c) depend(out:cw1,cw2)
+    plates = plating(garnish, meat);
+    #pragma omp task depend(in:cw1)
+    serve(plates[0]);
+    #pragma omp task depend(in:cw2)
+    serve(plates[1]);
+  }
+}
+</code></pre>
+<span class="fragment current-only" data-code-focus="1,17"></span>
+<span class="fragment current-only" data-code-focus="3,16"></span>
+<span class="fragment current-only" data-code-focus="5"></span>
+<span class="fragment current-only" data-code-focus="6,8,10,12,14"></span>
+</section>
+
+<section>
+<h2>Intel TBB</h2>
+<pre><code class="language-cpp stretch" contenteditable=true>using namespace tbb::flow;
+task_scheduler_init init(default_num_threads());
+graph g;
+
+continue_node&lt;continue_msg&gt; cook1(g, [&amp;] (auto) { garnish = cook_garnish(); });
+continue_node&lt;continue_msg&gt; cook2(g, [&amp;] (auto) { meat = cook_meat(); });
+continue_node&lt;continue_msg&gt; chief(g, [&amp;] (auto) { plates = plating(garnish, meat); });
+continue_node&lt;continue_msg&gt; waiter1(g, [&amp;] (auto) { serve(plates[0]); });
+continue_node&lt;continue_msg&gt; waiter2(g, [&amp;] (auto) { serve(plates[1]); });
+make_edge(cook1, chief); 
+make_edge(cook2, chief); 
+make_edge(chief, waiter1);
+make_edge(chief, waiter2);
+
+cook1.try_put(continue_msg());    // start at cook1
+cook2.try_put(continue_msg());    // start at cook2
+g.wait_for_all();
+</code></pre>
+<span class="fragment current-only" data-code-focus="5,6,7,8,9"></span>
+<span class="fragment current-only" data-code-focus="10,11,12,13"></span>
+<span class="fragment current-only" data-code-focus="15,16"></span>
+<span class="fragment current-only" data-code-focus="17"></span>
+</section>
+
+<section>
+<h2>Cpp-Taskflow</h2>
+<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow tf;
+
+auto [cook1, cook2, chief, waiter1, waiter2] = 
+  tf.silent_emplace(
+  [&amp;] () { garnish = cook_garnish();         },
+  [&amp;] () { meat    = cook_meat();            },
+  [&amp;] () { plates  = plating(garnish, meat); },
+  [&amp;] () { serve(plates[0]);                 },
+  [&amp;] () { serve(plates[1]);                 }
+);
+
+cook1.precede(chief);        // cook1 runs before chief
+cook2.precede(chief);        // cook2 runs before chief
+chief.precede(waiter1);      // chief runs before waiter1
+chief.precede(waiter2);      // chief runs before waiter2
+
+tf.wait_for_all();
+</code></pre>
+<span class="fragment current-only" data-code-focus="1"></span>
+<span class="fragment current-only" data-code-focus="3-10"></span>
+<span class="fragment current-only" data-code-focus="12-15"></span>
+<span class="fragment current-only" data-code-focus="17"></span>
+</section>
+
+<section>
+<h2>Cpp-Taskflow is FREE</h2>
+<ul>
+  <li>from explicit thread management</li>
+  <li>from difficult lock mechanism</li>
+  <li>from daunting class declaration</li>
+</ul>
+</section>
+        
+<section>
+<h2>Development Cost</h2>
+<small>SLOCCount Report</small>
+<canvas class="stretch" data-chart="bar">
+<!--
+{
+  "data" : {
+    "labels": ["C++ Thread", "OpenMP", "Intel TBB", "Cpp-Taskflow"],
+    "datasets": [{
+      "label": "$USD (left y-axis)",
+      "yAxisID": "y-axis-0",
+      "data": [538, 444, 585, 283]
+    },{
+      "label": "Lines of Code (right y-axis)",
+      "yAxisID": "y-axis-1",
+      "data": [24, 20, 26, 13]
+    }]
+  },
+  "options": {
+    "title": {
+      "display": false,
+      "text": "SLOCCount Report"
+    },
+    "tooltips": {"mode": "label"},
+    "responsive": true,
+    "scales": {
+      "xAxes": [{
+        "stacked": false
+      }],
+      "yAxes": [{
+        "position": "left",
+        "id": "y-axis-0"
+      },{
+        "position": "right",
+        "id": "y-axis-1"
+      }]
+    }
+  }
+}
+-->
+</canvas>
+</section>
+
+<section>
+<h2>What about Performance?</h2>
+</section>
+
+<section>
+  <h2>Graph Algorithm</h2>
+  <small>Runtime Comparison between OpenMP, Intel TBB, and Cpp-Taskflow</small>
+  <canvas data-chart="line" class="stretch">
+<!--
+{
+ "data": {
+  "labels": [5817,12825,22822,35480,50956,69186,90631,114178,141172,170321,202488,237789,275217,316828,359981,406301,455358,507886,558545],
+  "datasets":[
+   {
+    "data":[31.9706,55.6467,97.9151,163.659,260.129,393.637,563.647,786.221,1071.82,1426.78,1856.65,2367.76,2966.65,3661.49,4452.98,5348.2,6365.49,7496.8,8669.54],
+    "label":"Cpp-Taskflow",
+    "borderColor":"cyan",
+    "fill": "false"
+   },
+   {
+    "data":[29.8858,88.6728,198.891,378.971,647.324,1023.39,1523.27,2165.12,2964.54,3944,5114.89,6489.25,8087.28,9948.99,12059.1,14442.3,17141.4,20212.2,23370.5],
+    "label":"OpenMP",
+    "borderColor":"lime",
+    "fill": "false"
+   },
+   {
+    "data":[11.1309,36.9979,84.8226,160.575,272.973,434.324,660.185,943.245,1299.37,1731.51,2244.69,2843.82,3541.86,4351.28,5271.41,6312,7483.48,8800.76,10172.6],
+    "label":"Intel TBB",
+    "borderColor":"orange",
+    "fill": "false"
+   }
+  ]
+ },
+ "options": { 
+   "responsive" : "true",
+   "scales": {
+     "xAxes": [{
+       "scaleLabel" : { "display":"true", "labelString": "graph size (|V| + |E| = # tasks)" }
+     }],
+     "yAxes": [{
+       "scaleLabel" : { "display":"true", "labelString": "runtime (ms)" }
+     }]
+   }
+ }
+}
+-->
+</canvas>
+</section>
+
+
+<section>
+  <h2>Matrix Operation</h2>
+  <small>Runtime Comparison between OpenMP, Intel TBB, and Cpp-Taskflow</small>
+  <canvas data-chart="line" class="stretch">
+<!--
+{
+ "data": {
+  "labels": [16,576,1936,4096,7056,10816,15376,20736,26896,33856,41616,50176,59536,69696,80656,92416,104976,118336,132496,147456,163216,179776,197136,215296,234256,254016],
+  "datasets":[
+   {
+    "data":[1,5.9,7.2,10.5,17.8,29.7,49.4,81.7,125.9,183.2,258.5,347.6,457.8,588.7,742.4,921.1,1124.8,1366.3,1637.1,1932.6,2306.1,2719.3,3118.5,3544.8,4013.8,4542.5],
+    "label":"Cpp-Taskflow",
+    "borderColor":"cyan",
+    "fill": "false"
+   },
+   {
+    "data":[0.2,1.4,6.1,19.8,46.7,89.6,152.2,237.9,352.8,496.9,679.3,900.8,1166.8,1479.4,1843.8,2261.5,2737,3282.2,3891.8,4565.4,5366.3,6284,7199.3,8192.5,9278.2,10500.1],
+    "label":"OpenMP",
+    "borderColor":"lime",
+    "fill": "false"
+   },
+   {
+    "data":[0.1,0.1,1.3,7.5,19.9,40.6,71.3,115.4,173.2,246.9,338,447.7,578.4,732.7,910.2,1112.9,1344.6,1616.9,1916.1,2244.8,2645.1,3082.9,3533.2,4012.2,4539.8,5135.5],
+    "label":"Intel TBB",
+    "borderColor":"orange",
+    "fill": "false"
+   }
+  ]
+ },
+ "options": { 
+   "responsive" : "true",
+   "scales": {
+     "xAxes": [{
+       "scaleLabel" : { "display":"true", "labelString": "partition count (# tasks)" }
+     }],
+     "yAxes": [{
+       "scaleLabel" : { "display":"true", "labelString": "runtime (ms)" }
+     }]
+   }
+ }
+}
+-->
+</canvas>
+</section>
+
+<section>
+  <h2>Real Gain is Tremendous</h2>
+</section>
+
+<section>
+<h2>VLSI Timing Analysis</h2>
+<small>Dev Cost between <a href="https://github.come/OpenTimer/">OpenTimer</a> v1 (OpenMP) and v2 (Cpp-Taskflow)</small>
+<canvas class="stretch" data-chart="bar">
+<!--
+{
+  "data" : {
+    "labels": ["v1 (OpenMP)", "v2 (Cpp-Taskflow)"],
+    "datasets": [{
+      "label": "$USD (left y-axis)",
+      "yAxisID": "y-axis-0",
+      "data": [235000, 130000]
+    },{
+      "label": "Lines of Code (right y-axis)",
+      "yAxisID": "y-axis-1",
+      "data": [9123, 4482]
+    }]
+  },
+  "options": {
+    "tooltips": {"mode": "label"},
+    "responsive": true,
+    "scales": {
+      "xAxes": [{
+        "stacked": false
+      }],
+      "yAxes": [{
+        "position": "left",
+        "id": "y-axis-0"
+      },{
+        "position": "right",
+        "id": "y-axis-1"
+      }]
+    }
+  }
+}
+-->
+</canvas>
+</section>
+
+<section>
+  <h2>Runtime Performance</h2>
+  <small>OpenTimer v1 (OpenMP) and v2 (Cpp-Taskflow) </small>
+  <canvas data-chart="line" class="stretch">
+<!--
+{
+ "data": {
+  "labels": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+  "datasets":[
+   {
+    "data":[1292,1335,1369,1525,1320,1346,1366,1391,1448,1393,1259,1192,1238,1220,1471,1404,1419,1220,1225,1245],
+    "label":"v2 (Cpp-Taskflow)",
+    "borderColor":"cyan",
+    "fill": "false"
+   },
+   {
+    "data":[2853,2957,3058,3032,3007,3052,2925,2898,2822,2854,2757,2963,2832,2834,2716,2777,2538,2612,2592,3176],
+    "label":"v1 (OpenMP)",
+    "borderColor":"lime",
+    "fill": "false"
+   }
+  ]
+ },
+ "options": { 
+   "responsive" : "true",
+   "scales": {
+     "xAxes": [{
+       "scaleLabel" : { "display":"true", "labelString": "incremental timing iteration" }
+     }],
+     "yAxes": [{
+       "scaleLabel" : { "display":"true", "labelString": "runtime (ms)" }
+     }]
+   }
+ }
+}
+-->
+</canvas>
+</section>
+
+<section>
+<h2>Parallel Scaling Performance</h2>
+<small>OpenTimer v2 (Cpp-Taskflow) Runtime across Increasing Numbers of Cores</small>
+<canvas class="stretch" data-chart="bar">
+<!--
+{
+  "data" : {
+    "labels": ["1 core", "2 cores", "3 cores", "4 cores"],
+    "datasets": [{
+      "label": "cpu runtime (ms)",
+      "data": [57, 34, 29, 23]
+    }]
+  },
+  "options": {
+    "tooltips": {"mode": "label"},
+    "responsive": true,
+    "scales": {
+      "xAxes": [{
+        "stacked": false
+      }],
+      "yAxes": [{
+        "position": "left",
+        "id": "y-axis-0"
+      }]
+    }
+  }
+}
+-->
+</canvas>
+</section>
+
+
+<section>
+  <h2>Visualize a Taskflow Graph</h2>
+
+<table>
+<tr>
+<td><input type="submit" class="button" value="Dump Me" onclick="submit()" style="position: relative; left: 35%; "></td>
+<td>DOT (.vz)</td>
+</tr>
+
+<tr style="border-style:hidden;">
+<td align="center" valign="right">  
+<pre><code class="language-cpp stretch" contenteditable=true id="code_area">tf::Taskflow tf;
+auto [A, B, C, D] = tf.silent_emplace(
+  [] () { std::cout &lt&lt "TaskA\n"; },     
+  [] () { std::cout &lt&lt "TaskB\n"; },     
+  [] () { std::cout &lt&lt "TaskC\n"; },     
+  [] () { std::cout &lt&lt "TaskD\n"; }      
+);
+A.precede(B).precede(C).name("A");  
+B.precede(D).name("B");  
+C.precede(D).name("C");  
+D.name("D");
+std::cout &lt&lt tf.dump() ;  
+</code></pre>
+</td>
+
+<td align="center" valign="middle" style="vertical-align:middle" > 
+<img id="flow_graph" src="js/debug.png" style="border: 0px; background:none"> </img>
+</td>
+</tr>
+
+</table>
+
+
+</section>
+
+
+<section>
+<h2>Dynamic Tasking</h2>
+<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow tf;
+auto A = tf.silent_emplace([](){}).name("A");
+auto C = tf.silent_emplace([](){}).name("C");
+auto D = tf.silent_emplace([](){}).name("D");
+
+auto B = tf.silent_emplace([] (auto& subflow) {
+  auto B1 = subflow.silent_emplace([](){}).name("B1");
+  auto B2 = subflow.silent_emplace([](){}).name("B2");
+  auto B3 = subflow.silent_emplace([](){}).name("B3");
+  B1.precede(B3);
+  B2.precede(B3);
+}).name("B");
+            
+A.precede(B);  // B runs after A 
+A.precede(C);  // C runs after A 
+B.precede(D);  // D runs after B 
+C.precede(D);  // D runs after C 
+</code></pre>
+<span class="fragment current-only" data-code-focus="6"></span>
+<span class="fragment current-only" data-code-focus=""></span>
+</section>
+
+<section>
+<img src="image/dynamic_tasking.png" style="background:none">
+</section>
+
+
+<section>
+<h2>Drop-in Integration</h2>
+<pre><code class="language-bash stretch" contenteditable=true># clone the newest Cpp-Taskflow
+~$ git clone https://github.com/cpp-taskflow/cpp-taskflow.git
+
+# Cpp-Taskflow is header-only
+~$ cp -r cpp-taskflow/taskflow my_project/
+
+# compile you code with g++, clang++, or msvc
+~$ g++ -std=c++17 my_project/test.cpp -pthread
+</code></pre>
+<span class="fragment current-only" data-code-focus="4,5"></span>
+</section>
+
+<section>
+<h2>We ♥ Feedback</h2>
+<p><q>Cpp-Taskflow is the cleanest Task API I've ever seen.</q></p>
+<p><q>Cpp-Taskflow has a very simple and elegant tasking interface. The performance also scales very well.</q></p>
+<p><q>Best Poster Award in the official CPP Conference, 2018</q></p>
+</section>
+
+
+<section>
+<h2>Acknowledgment</h2>
+<ul>
+  <li>Development Team</li>
+  <li>Contributors</li>
+  <li>Grants (NSF, DARPA)</li>
+  <li>... and You!</li>
+</ul>
+</section>
+
+        
+<section data-markdown>
+  <script type="text/template">
+# Thank You
+<small>T.-W. Huang, C.-X. Lin, G. Guo, and M. Wong</small></p>
+
+| Without Cpp-Taskflow | With Cpp-Taskflow |
+| :------------------: | :---------------: |
+| ![](image/profile_without_taskflow.gif) | ![](image/profile_with_taskflow.gif) |
+
+<p><i class="fa fa-github"></i><a href="https://github.com/cpp-taskflow/cpp-taskflow">https://github.com/cpp-taskflow</a></p>
+  </script>
+</section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        chart: {
+          defaults: { 
+            global: { 
+              title: { fontColor: "#FFF" }, 
+              legend: {
+                labels: { fontColor: "#FFF" },
+              },
+            },
+            scale: { 
+              scaleLabel: { fontColor: "#FFF" }, 
+              gridLines: { color: "#FFF", zeroLineColor: "#FFF" }, 
+              ticks: { fontColor: "#FFF" }, 
+            } 
+          },
+          line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+          bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+          pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+          radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+        },
+
+        // Chart attributes
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js' },
+          { src: 'plugin/search/search.js', async: true },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/line-numbers/line-numbers.js' },
+          { src: 'plugin/code-focus/reveal-code-focus.js', async: true, callback: function() { RevealCodeFocus(); } },
+          { src: 'plugin/chart/Chart.min.js' },       
+          { src: 'plugin/chart/csv2chart.js', async: false }
+        ]
+      });
+    </script>
+
+  </body>
+</html>

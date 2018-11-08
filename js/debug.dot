@@ -1,0 +1,13 @@
+digraph Taskflow {
+graph [bgcolor=transparent, fontsize=18]
+node [fontcolor=yellow, fillcolor=white, color=white, fontsize=18]
+edge [fillcolor=white, color=white]
+"A";
+"A" -> "B";
+"A" -> "C";
+"B";
+"B" -> "D";
+"C";
+"C" -> "D";
+"D";
+}
