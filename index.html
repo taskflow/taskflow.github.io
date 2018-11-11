@@ -466,43 +466,6 @@ tf.wait_for_all();
 
 
 <section>
-  <h2>Visualize a Taskflow Graph</h2>
-
-<table>
-<tr>
-<td><input type="submit" class="button" value="Dump Me" onclick="submit()" style="position: relative; left: 35%; "></td>
-<td>DOT (.vz)</td>
-</tr>
-
-<tr style="border-style:hidden;">
-<td align="center" valign="right">  
-<pre><code class="language-cpp stretch" contenteditable=true id="code_area">tf::Taskflow tf;
-auto [A, B, C, D] = tf.silent_emplace(
-  [] () { std::cout &lt&lt "TaskA\n"; },     
-  [] () { std::cout &lt&lt "TaskB\n"; },     
-  [] () { std::cout &lt&lt "TaskC\n"; },     
-  [] () { std::cout &lt&lt "TaskD\n"; }      
-);
-A.precede(B).precede(C).name("A");  
-B.precede(D).name("B");  
-C.precede(D).name("C");  
-D.name("D");
-std::cout &lt&lt tf.dump() ;  
-</code></pre>
-</td>
-
-<td align="center" valign="middle" style="vertical-align:middle" > 
-<img id="flow_graph" src="js/debug.png" style="border: 0px; background:none"> </img>
-</td>
-</tr>
-
-</table>
-
-
-</section>
-
-
-<section>
 <h2>Dynamic Tasking</h2>
 <pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow tf;
 auto A = tf.silent_emplace([](){}).name("A");
