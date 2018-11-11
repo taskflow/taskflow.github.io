@@ -1,6 +1,6 @@
 # Cpp-Taskflow
 
-The quick demo for [Cpp-Taskflow][Cpp-Taskflow].
+The quick demo of [Cpp-Taskflow][Cpp-Taskflow].
 
 * * *
 
