@@ -13,11 +13,11 @@ int main(int argc, char* argv[]) {
   std::vector<double> tbbs;
   std::vector<double> tfs;
 
-  double size, omp, tbb, tf;
+  double size, omp, tbb, tf, s1, s2;
 
   while(ifs) {
     
-    ifs >> size >> omp >> tbb >> tf;
+    ifs >> size >> omp >> tbb >> tf >> s1 >> s2;
 
     sizes.push_back(size);
     omps.push_back(omp);
