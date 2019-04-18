@@ -250,7 +250,7 @@ module_A.precde(taskB2, taskB3);
 <section>
 <h2>Activity Visualization</h2>
 <pre><code class="language-cpp stretch" contenteditable=true style="width: 900px">tf::Taskflow taskflow;
-auto executor = taskflow.share_executor()
+auto executor = taskflow.share_executor();
 auto observer = executor->make_observer< tf::ExecutorObserver>();
 
 tf::Framework A;
