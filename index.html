@@ -205,6 +205,47 @@ tf.wait_for_all();
 <span class="fragment current-only" data-code-focus="17"></span>
 </section>
 
+
+<section>
+<h2>Composability</h2>
+
+<pre><code class="language-cpp stretch" contenteditable=true>tf::Framework A;
+auto [taskA1, taskA2, taskA3] = A.emplace(
+  []() { std::cout << "Task A1\n"; },
+  []() { std::cout << "Task A2\n"; },
+  []() { std::cout << "Task A3\n"; }
+);
+taskA1.precede(taskA2, taskA3);
+
+tf::Framework B;
+auto [taskB1, taskB2, taskB3] = B.emplace(
+  []() { std::cout << "Task B1\n"; },
+  []() { std::cout << "Task B2\n"; },
+  []() { std::cout << "Task B3\n"; }
+);
+// Compose framework A
+auto module_A = B.composed_of(A); 
+
+taskB1.precede(module_A);
+module_A.precde(taskB2, taskB3);
+
+</code></pre>
+<span class="fragment current-only" data-code-focus="16"></span>
+</section>
+
+
+<section>
+<h2>Composable Task Graph</h2>
+<div class="column">
+  <img data-src="image/fA.png", style="max-width: 300px">
+  <img data-src="image/fB.png", style="max-width: 300px">
+</div>
+<p style="line-height: 0.1">&#8681;</p>
+<div class="column">
+  <img data-src="image/fC.png", style="max-width: 700px; height: 200px">
+</div>
+</section>
+
 <section>
 <h2>Cpp-Taskflow is FREE</h2>
 <ul>
@@ -543,6 +584,7 @@ C.precede(D);  // D runs after C
 
       </div>
     </div>
+
 
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.js"></script>
