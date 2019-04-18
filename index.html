@@ -246,6 +246,37 @@ module_A.precde(taskB2, taskB3);
 </div>
 </section>
 
+
+<section>
+<h2>Activity Visualization</h2>
+<pre><code class="language-cpp stretch" contenteditable=true style="width: 900px">tf::Taskflow taskflow;
+auto executor = taskflow.share_executor()
+auto observer = executor->make_observer< tf::ExecutorObserver>();
+
+tf::Framework A;
+auto [taskA1, taskA2, taskA3] = A.emplace(
+  []() { std::cout << "Task A1\n"; },
+  []() { std::cout << "Task A2\n"; },
+  []() { std::cout << "Task A3\n"; }
+);
+taskA1.precede(taskA2, taskA3);
+
+taskflow.run_n(A, 10).get();
+
+// Dump the executor's activities            
+observer.dump(std::cout);
+</code></pre>
+<span class="fragment current-only" data-code-focus="3"></span>
+<span class="fragment current-only" data-code-focus="16"></span>
+</section>
+
+
+<section>
+<h2>Activity Visualization</h2>
+<img data-src="image/timeline.png", style="max-width: 1000px">
+</section>
+
+
 <section>
 <h2>Cpp-Taskflow is FREE</h2>
 <ul>
