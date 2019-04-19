@@ -206,75 +206,7 @@ tf.wait_for_all();
 </section>
 
 
-<section>
-<h2>Composability</h2>
 
-<pre><code class="language-cpp stretch" contenteditable=true>tf::Framework A;
-auto [taskA1, taskA2, taskA3] = A.emplace(
-  []() { std::cout << "Task A1\n"; },
-  []() { std::cout << "Task A2\n"; },
-  []() { std::cout << "Task A3\n"; }
-);
-taskA1.precede(taskA2, taskA3);
-
-tf::Framework B;
-auto [taskB1, taskB2, taskB3] = B.emplace(
-  []() { std::cout << "Task B1\n"; },
-  []() { std::cout << "Task B2\n"; },
-  []() { std::cout << "Task B3\n"; }
-);
-// Compose framework A
-auto module_A = B.composed_of(A); 
-
-taskB1.precede(module_A);
-module_A.precde(taskB2, taskB3);
-
-</code></pre>
-<span class="fragment current-only" data-code-focus="16"></span>
-</section>
-
-
-<section>
-<h2>Composable Task Graph</h2>
-<div class="column">
-  <img data-src="image/fA.png", style="max-width: 300px">
-  <img data-src="image/fB.png", style="max-width: 300px">
-</div>
-<p style="line-height: 0.1">&#8681;</p>
-<div class="column">
-  <img data-src="image/fC.png", style="max-width: 700px; height: 200px">
-</div>
-</section>
-
-
-<section>
-<h2>Activity Visualization</h2>
-<pre><code class="language-cpp stretch" contenteditable=true style="width: 900px">tf::Taskflow taskflow;
-auto executor = taskflow.share_executor();
-auto observer = executor->make_observer< tf::ExecutorObserver>();
-
-tf::Framework A;
-auto [taskA1, taskA2, taskA3] = A.emplace(
-  []() { std::cout << "Task A1\n"; },
-  []() { std::cout << "Task A2\n"; },
-  []() { std::cout << "Task A3\n"; }
-);
-taskA1.precede(taskA2, taskA3);
-
-taskflow.run_n(A, 10).get();
-
-// Dump the executor's activities            
-observer.dump(std::cout);
-</code></pre>
-<span class="fragment current-only" data-code-focus="3"></span>
-<span class="fragment current-only" data-code-focus="16"></span>
-</section>
-
-
-<section>
-<h2>Activity Visualization</h2>
-<img data-src="image/timeline.png", style="max-width: 1000px">
-</section>
 
 
 <section>
@@ -545,7 +477,7 @@ auto A = tf.silent_emplace([](){}).name("A");
 auto C = tf.silent_emplace([](){}).name("C");
 auto D = tf.silent_emplace([](){}).name("D");
 
-auto B = tf.silent_emplace([] (auto& subflow) {
+auto B = tf.silent_emplace([] (auto&amp; subflow) {
   auto B1 = subflow.silent_emplace([](){}).name("B1");
   auto B2 = subflow.silent_emplace([](){}).name("B2");
   auto B3 = subflow.silent_emplace([](){}).name("B3");
@@ -564,6 +496,72 @@ C.precede(D);  // D runs after C
 
 <section>
 <img src="image/dynamic_tasking.png" style="background:none">
+</section>
+
+<section>
+<h2>Composability</h2>
+
+<pre><code class="language-cpp stretch" contenteditable=true>tf::Framework A;
+auto [taskA1, taskA2, taskA3] = A.emplace(
+  []() { std::cout &lt;&lt; "Task A1\n"; },
+  []() { std::cout &lt;&lt; "Task A2\n"; },
+  []() { std::cout &lt;&lt; "Task A3\n"; }
+);
+taskA1.precede(taskA2, taskA3);
+
+tf::Framework B;
+auto [taskB1, taskB2, taskB3] = B.emplace(
+  []() { std::cout &lt;&lt; "Task B1\n"; },
+  []() { std::cout &lt;&lt; "Task B2\n"; },
+  []() { std::cout &lt;&lt; "Task B3\n"; }
+);
+// Compose framework A
+auto module_A = B.composed_of(A); 
+taskB1.precede(module_A);
+module_A.precde(taskB2, taskB3);
+</code></pre>
+<span class="fragment current-only" data-code-focus="16"></span>
+</section>
+
+
+<section>
+<h2>Composable Task Graph</h2>
+<div class="column">
+  <img data-src="image/fA.png", style="max-width: 300px">
+  <img data-src="image/fB.png", style="max-width: 300px">
+</div>
+<p style="line-height: 0.1">&#8681;</p>
+<div class="column">
+  <img data-src="image/fC.png", style="max-width: 700px; height: 200px">
+</div>
+</section>
+
+
+<section>
+<h2>Observer Thread Activities</h2>
+<pre><code class="language-cpp stretch" contenteditable=true style="width: 900px">tf::Taskflow taskflow;
+auto executor = taskflow.share_executor();
+auto observer = executor-&gt;make_observer&lt;tf::ExecutorObserver&gt;();
+
+tf::Framework A;
+auto [taskA1, taskA2, taskA3] = A.emplace(
+  []() { std::cout &lt;&lt; "Task A1\n"; },
+  []() { std::cout &lt;&lt; "Task A2\n"; },
+  []() { std::cout &lt;&lt; "Task A3\n"; }
+);
+taskA1.precede(taskA2, taskA3);
+
+taskflow.run_n(A, 10).get();
+
+// Dump thread activities to chrome://tracing
+observer.dump(std::cout);
+</code></pre>
+<span class="fragment current-only" data-code-focus="3,16"></span>
+</section>
+
+<section>
+<h2>chrome://tracing</h2>
+<img data-src="image/timeline.png", style="max-height: 80%">
 </section>
 
 
