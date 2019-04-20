@@ -478,11 +478,13 @@ auto C = tf.silent_emplace([](){}).name("C");
 auto D = tf.silent_emplace([](){}).name("D");
 
 auto B = tf.silent_emplace([] (auto&amp; subflow) {
+  auto B0 = subflow.silent_emplace([](){}).name("B0");
   auto B1 = subflow.silent_emplace([](){}).name("B1");
   auto B2 = subflow.silent_emplace([](){}).name("B2");
   auto B3 = subflow.silent_emplace([](){}).name("B3");
-  B1.precede(B3);
-  B2.precede(B3);
+  auto B4 = subflow.silent_emplace([](){}).name("B4");
+  B0.precede(B1, B2, B3);
+  B4.gather(B1, B2, B3);
 }).name("B");
             
 A.precede(B);  // B runs after A 
