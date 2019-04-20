@@ -1,0 +1,39 @@
+digraph Topology {
+
+bgcolor="transparent";
+node [fontcolor=yellow fontsize=25 color=white penwidth=3];
+edge [color=white];
+fontcolor=white;
+fontsize=25;
+
+
+  p0x7f2b06ad2020[label="D"];
+  p0x7f2b06ad2138[label="C"];
+  p0x7f2b06ad2138 -> p0x7f2b06ad2020;
+  p0x7f2b06ad2250[label="B"];
+  p0x7f2b06ad2250 -> p0x7f2b06ad2020;
+  subgraph cluster_B {
+    label="Subflow_B";
+label="Subflow_B";
+color=deepskyblue;
+penwidth=3;
+
+    p0x7f2b06a52020[label="B0"];
+    p0x7f2b06a52020 -> p0x7f2b06a52138;
+    p0x7f2b06a52020 -> p0x7f2b06a52250;
+    p0x7f2b06a52020 -> p0x7f2b06a52368;
+    p0x7f2b06a52138[label="B1"];
+    p0x7f2b06a52138 -> p0x7f2b06a52480;
+    p0x7f2b06a52250[label="B2"];
+    p0x7f2b06a52250 -> p0x7f2b06a52480;
+    p0x7f2b06a52368[label="B3"];
+    p0x7f2b06a52368 -> p0x7f2b06a52480;
+    p0x7f2b06a52480[label="B4"];
+    p0x7f2b06a52480 -> p0x7f2b06ad2250;
+  }
+  p0x7f2b06ad2368[label="A"];
+  p0x7f2b06ad2368 -> p0x7f2b06ad2250;
+  p0x7f2b06ad2368 -> p0x7f2b06ad2138;
+}
+
+
