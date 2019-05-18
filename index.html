@@ -197,7 +197,7 @@ cook2.precede(chief);        // cook2 runs before chief
 chief.precede(waiter1);      // chief runs before waiter1
 chief.precede(waiter2);      // chief runs before waiter2
 
-tf.wait_for_all();
+tf::Executor().run(tf);
 </code></pre>
 <span class="fragment current-only" data-code-focus="1"></span>
 <span class="fragment current-only" data-code-focus="3-10"></span>
