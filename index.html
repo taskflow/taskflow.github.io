@@ -181,10 +181,11 @@ g.wait_for_all();
 
 <section>
 <h2>Cpp-Taskflow</h2>
-<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow tf;
+<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow executor;
+tf::Taskflow taskflow;
 
 auto [cook1, cook2, chief, waiter1, waiter2] = 
-  tf.silent_emplace(
+  taskflow.silent_emplace(
   [&amp;] () { garnish = cook_garnish();         },
   [&amp;] () { meat    = cook_meat();            },
   [&amp;] () { plates  = plating(garnish, meat); },
@@ -197,7 +198,7 @@ cook2.precede(chief);        // cook2 runs before chief
 chief.precede(waiter1);      // chief runs before waiter1
 chief.precede(waiter2);      // chief runs before waiter2
 
-tf::Executor().run(tf);
+executor.run(tf);
 </code></pre>
 <span class="fragment current-only" data-code-focus="1"></span>
 <span class="fragment current-only" data-code-focus="3-10"></span>
