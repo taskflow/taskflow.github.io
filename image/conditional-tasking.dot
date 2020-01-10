@@ -1,0 +1,12 @@
+digraph Taskflow {
+   rankdir="LR"
+   A->B;
+   A->C;
+   B->D;
+   D[label="D"  shape=diamond color=black fillcolor=aquamarine style=filled];
+   D->B[style=dashed label="0"];
+   D->D[style=dashed label="1"];
+   D->E[style=dashed label="2"];
+   C->F
+}
+

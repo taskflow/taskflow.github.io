@@ -1,0 +1,29 @@
+digraph Taskflow {
+subgraph cluster_p0x7ffc8dea6f60 {
+label="Main taskflow";
+p0x56512e2a43c0[label="A" ];
+p0x56512e2a43c0 -> p0x56512e2a4730;
+p0x56512e2a43c0 -> p0x56512e2a44f0;
+p0x56512e2a44f0[label="C" ];
+p0x56512e2a44f0 -> p0x56512e2a4620;
+p0x56512e2a4620[label="D" ];
+p0x56512e2a4730[label="B" ];
+p0x56512e2a4730 -> p0x56512e2a4620;
+subgraph cluster_p0x56512e2a4730 {
+label="Subflow: B";
+color=blue
+p0x7f152c000b20[label="B0" ];
+p0x7f152c000b20 -> p0x7f152c000c50;
+p0x7f152c000b20 -> p0x7f152c000d80;
+p0x7f152c000b20 -> p0x7f152c000ec0;
+p0x7f152c000c50[label="B1" ];
+p0x7f152c000c50 -> p0x7f152c000fd0;
+p0x7f152c000d80[label="B2" ];
+p0x7f152c000d80 -> p0x7f152c000fd0;
+p0x7f152c000ec0[label="B3" ];
+p0x7f152c000ec0 -> p0x7f152c000fd0;
+p0x7f152c000fd0[label="B4" ];
+p0x7f152c000fd0 -> p0x56512e2a4730;
+}
+}
+}

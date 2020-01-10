@@ -185,7 +185,7 @@ g.wait_for_all();
 tf::Taskflow taskflow;
 
 auto [cook1, cook2, chief, waiter1, waiter2] = 
-  taskflow.silent_emplace(
+  taskflow.emplace(
   [&amp;] () { garnish = cook_garnish();         },
   [&amp;] () { meat    = cook_meat();            },
   [&amp;] () { plates  = plating(garnish, meat); },
@@ -474,18 +474,18 @@ executor.run(tf);
 <section>
 <h2>Dynamic Tasking</h2>
 <pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow tf;
-auto A = tf.silent_emplace([](){}).name("A");
-auto C = tf.silent_emplace([](){}).name("C");
-auto D = tf.silent_emplace([](){}).name("D");
+auto A = tf.emplace([](){}).name("A");
+auto C = tf.emplace([](){}).name("C");
+auto D = tf.emplace([](){}).name("D");
 
-auto B = tf.silent_emplace([] (auto&amp; subflow) {
-  auto B0 = subflow.silent_emplace([](){}).name("B0");
-  auto B1 = subflow.silent_emplace([](){}).name("B1");
-  auto B2 = subflow.silent_emplace([](){}).name("B2");
-  auto B3 = subflow.silent_emplace([](){}).name("B3");
-  auto B4 = subflow.silent_emplace([](){}).name("B4");
+auto B = tf.emplace([] (auto&amp; subflow) {
+  auto B0 = subflow.emplace([](){}).name("B0");
+  auto B1 = subflow.emplace([](){}).name("B1");
+  auto B2 = subflow.emplace([](){}).name("B2");
+  auto B3 = subflow.emplace([](){}).name("B3");
+  auto B4 = subflow.emplace([](){}).name("B4");
   B0.precede(B1, B2, B3);
-  B4.gather(B1, B2, B3);
+  B4.succeed(B1, B2, B3);
 }).name("B");
             
 A.precede(B);  // B runs after A 
@@ -499,13 +499,39 @@ C.precede(D);  // D runs after C
 
 <section>
 <!--img src="image/dynamic_tasking.png" style="background:none"-->
-<img src="image/subflow.png" style="background:none">
+<img src="image/dynamic-tasking.svg" style="background:none">
+</section>
+
+
+<section>
+<h2>Conditional Tasking</h2>
+<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow tf;
+auto A = tf.emplace([](){}).name("A");
+auto B = tf.emplace([](){}).name("B");
+auto C = tf.emplace([](){}).name("C");
+auto D = tf.emplace([](){}).name("D");
+auto E = tf.emplace([](){ return rand()%3; }).name("E");
+auto F = tf.emplace([](){}).name("F");
+
+A.precede(B, C);  // A runs before B and C
+B.precede(D);     // B runs before D
+C.precede(F);     // C runs before F
+D.precede(B);     // D conditions B on 0 (feedback)
+D.precede(D);     // D conditions D on 1 (self-loop)
+D.precede(E);     // D conditions E on 2
+</code></pre>
+<span class="fragment current-only" data-code-focus="6,12-14"></span>
+<span class="fragment current-only" data-code-focus=""></span>
+</section>
+
+<section>
+<img src="image/conditional-tasking.svg" style="background:none">
 </section>
 
 <section>
 <h2>Composability</h2>
 
-<pre><code class="language-cpp stretch" contenteditable=true>tf::Framework A;
+<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow A, B;
 auto [taskA1, taskA2, taskA3] = A.emplace(
   []() { std::cout &lt;&lt; "Task A1\n"; },
   []() { std::cout &lt;&lt; "Task A2\n"; },
@@ -513,31 +539,22 @@ auto [taskA1, taskA2, taskA3] = A.emplace(
 );
 taskA1.precede(taskA2, taskA3);
 
-tf::Framework B;
 auto [taskB1, taskB2, taskB3] = B.emplace(
   []() { std::cout &lt;&lt; "Task B1\n"; },
   []() { std::cout &lt;&lt; "Task B2\n"; },
   []() { std::cout &lt;&lt; "Task B3\n"; }
 );
-// Compose framework A
+// Compose taskflow B
 auto module_A = B.composed_of(A); 
 taskB1.precede(module_A);
-module_A.precde(taskB2, taskB3);
+module_A.precede(taskB2, taskB3);
 </code></pre>
 <span class="fragment current-only" data-code-focus="16"></span>
 </section>
 
 
 <section>
-<h2>Composable Task Graph</h2>
-<div class="column">
-  <img data-src="image/fA.png", style="max-width: 300px">
-  <img data-src="image/fB.png", style="max-width: 300px">
-</div>
-<p style="line-height: 0.1">&#8681;</p>
-<div class="column">
-  <img data-src="image/fC.png", style="max-width: 700px; height: 200px">
-</div>
+<img src="image/composable-tasking.svg" style="background:none">
 </section>
 
 
@@ -588,6 +605,7 @@ observer.dump(std::cout);
 <p><q>Cpp-Taskflow is the cleanest Task API I've ever seen.</q></p>
 <p><q>Cpp-Taskflow has a very simple and elegant tasking interface. The performance also scales very well.</q></p>
 <p><q>Best Poster Award in the official CPP Conference, 2018</q></p>
+<p><q>Second Prize of Open Source Software Competition in ACM Multimedia Conference, 2019</q></p>
 </section>
 
 
@@ -596,8 +614,8 @@ observer.dump(std::cout);
 <ul>
   <li>Development Team</li>
   <li>Contributors</li>
-  <li>Grants (NSF, DARPA)</li>
-  <li>... and You!</li>
+  <li>Sponsors (NSF, DARPA)</li>
+  <li>... and all users!</li>
 </ul>
 </section>
 
