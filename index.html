@@ -591,11 +591,9 @@ executor.run(taskflow).wait();
 <section>
 <h2>Monitor Thread Activities</h2>
 <pre><code class="language-cpp stretch" contenteditable=true style="width: 900px">tf::Taskflow taskflow;
-auto executor = taskflow.share_executor();
-auto observer = executor-&gt;make_observer&lt;tf::ExecutorObserver&gt;();
+auto observer = executor.make_observer&lt;tf::ExecutorObserver&gt;();
 
-tf::Framework A;
-auto [taskA1, taskA2, taskA3] = A.emplace(
+auto [taskA1, taskA2, taskA3] = taskflow.emplace(
   []() { std::cout &lt;&lt; "Task A1\n"; },
   []() { std::cout &lt;&lt; "Task A2\n"; },
   []() { std::cout &lt;&lt; "Task A3\n"; }
@@ -607,7 +605,7 @@ taskflow.run_n(A, 10).get();
 // Dump thread activities to chrome://tracing
 observer.dump(std::cout);
 </code></pre>
-<span class="fragment current-only" data-code-focus="3,16"></span>
+<span class="fragment current-only" data-code-focus="2,14"></span>
 </section>
 
 <section>
