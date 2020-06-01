@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Cpp-Taskflow</title>
+    <title>Taskflow</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="css/reveal.css">
@@ -59,10 +59,10 @@
       <div class="slides">
 
         <section>
-          <h1>Cpp-Taskflow</h1>
+          <h1>Taskflow</h1>
           <h3>Modern C++ Parallel Task Programming</h3>
-          <p><i class="fa fa-github"></i><a href="https://github.com/cpp-taskflow/cpp-taskflow">Project GitHub</a></p>
-          <p><i class="fa fa-book"></i><a href="https://cpp-taskflow.github.io/cpp-taskflow/index.html">API Documentation</a></p>
+          <p><i class="fa fa-github"></i><a href="https://github.com/taskflow/taskflow">Project GitHub</a></p>
+          <p><i class="fa fa-book"></i><a href="https://taskflow.github.io/taskflow/index.html">API Documentation</a></p>
           <p><small>Presented by <a href="https://tsung-wei-huang.github.io/">Tsung-Wei Huang</a></small></p>
         </section>
         
@@ -180,7 +180,7 @@ g.wait_for_all();
 </section>
 
 <section>
-<h2>Cpp-Taskflow</h2>
+<h2>Taskflow</h2>
 <pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow executor;
 tf::Taskflow taskflow;
 
@@ -211,7 +211,7 @@ executor.run(tf);
 
 
 <section>
-<h2>Cpp-Taskflow is FREE</h2>
+<h2>Taskflow is FREE</h2>
 <ul>
   <li>from explicit thread management</li>
   <li>from difficult lock mechanism</li>
@@ -226,7 +226,7 @@ executor.run(tf);
 <!--
 {
   "data" : {
-    "labels": ["C++ Thread", "OpenMP", "Intel TBB", "Cpp-Taskflow"],
+    "labels": ["C++ Thread", "OpenMP", "Intel TBB", "Taskflow"],
     "datasets": [{
       "label": "$USD (left y-axis)",
       "yAxisID": "y-axis-0",
@@ -268,7 +268,7 @@ executor.run(tf);
 
 <section>
   <h2>Graph Algorithm</h2>
-  <small>Runtime Comparison between OpenMP, Intel TBB, and Cpp-Taskflow</small>
+  <small>Runtime Comparison between OpenMP, Intel TBB, and Taskflow</small>
   <canvas data-chart="line" class="stretch">
 <!--
 {
@@ -277,7 +277,7 @@ executor.run(tf);
   "datasets":[
    {
     "data":[0.896,1.4388,0.872,1.8276,3.3546,4.7556,6.6698,9.3192,11.9644,15.176,18.9224,23.8458,27.312,32.816,38.247,43.4582],
-    "label":"Cpp-Taskflow",
+    "label":"Taskflow",
     "borderColor":"cyan",
     "fill": "false"
    },
@@ -314,7 +314,7 @@ executor.run(tf);
 
 <section>
   <h2>Matrix Operation</h2>
-  <small>Runtime Comparison between OpenMP, Intel TBB, and Cpp-Taskflow</small>
+  <small>Runtime Comparison between OpenMP, Intel TBB, and Taskflow</small>
   <canvas data-chart="line" class="stretch">
 <!--
 {
@@ -323,7 +323,7 @@ executor.run(tf);
   "datasets":[
    {
     "data":[1.9486,0.8256,1.0208,1.865,2.823,4.5788,6.949,9.7488,13.0142,16.6228,19.8972,24.0684,28.415,33.5568,39.9492,44.4578,48.3986],
-    "label":"Cpp-Taskflow",
+    "label":"Taskflow",
     "borderColor":"cyan",
     "fill": "false"
    },
@@ -363,12 +363,12 @@ executor.run(tf);
 
 <section>
 <h2>VLSI Timing Analysis</h2>
-<small>Dev Cost between <a href="https://github.come/OpenTimer/">OpenTimer</a> v1 (OpenMP) and v2 (Cpp-Taskflow)</small>
+<small>Dev Cost between <a href="https://github.come/OpenTimer/">OpenTimer</a> v1 (OpenMP) and v2 (Taskflow)</small>
 <canvas class="stretch" data-chart="bar">
 <!--
 {
   "data" : {
-    "labels": ["v1 (OpenMP)", "v2 (Cpp-Taskflow)"],
+    "labels": ["v1 (OpenMP)", "v2 (Taskflow)"],
     "datasets": [{
       "label": "$USD (left y-axis)",
       "yAxisID": "y-axis-0",
@@ -402,7 +402,7 @@ executor.run(tf);
 
 <section>
   <h2>Runtime Performance</h2>
-  <small>OpenTimer v1 (OpenMP) and v2 (Cpp-Taskflow) </small>
+  <small>OpenTimer v1 (OpenMP) and v2 (Taskflow) </small>
   <canvas data-chart="line" class="stretch">
 <!--
 {
@@ -411,7 +411,7 @@ executor.run(tf);
   "datasets":[
    {
     "data":[1292,1335,1369,1525,1320,1346,1366,1391,1448,1393,1259,1192,1238,1220,1471,1404,1419,1220,1225,1245],
-    "label":"v2 (Cpp-Taskflow)",
+    "label":"v2 (Taskflow)",
     "borderColor":"cyan",
     "fill": "false"
    },
@@ -441,7 +441,7 @@ executor.run(tf);
 
 <section>
 <h2>Parallel Scaling Performance</h2>
-<small>OpenTimer v2 (Cpp-Taskflow) Runtime across Increasing Numbers of Cores</small>
+<small>OpenTimer v2 (Taskflow) Runtime across Increasing Numbers of Cores</small>
 <canvas class="stretch" data-chart="bar">
 <!--
 {
@@ -616,11 +616,11 @@ observer.dump(std::cout);
 
 <section>
 <h2>Drop-in Integration</h2>
-<pre><code class="language-bash stretch" contenteditable=true># clone the newest Cpp-Taskflow
-~$ git clone https://github.com/cpp-taskflow/cpp-taskflow.git
+<pre><code class="language-bash stretch" contenteditable=true># clone the newest Taskflow
+~$ git clone https://github.com/taskflow/taskflow.git
 
-# Cpp-Taskflow is header-only
-~$ cp -r cpp-taskflow/taskflow my_project/
+# Taskflow is header-only
+~$ cp -r taskflow/taskflow my_project/
 
 # compile you code with g++, clang++, or msvc
 ~$ g++ -std=c++17 my_project/test.cpp -pthread
@@ -630,8 +630,8 @@ observer.dump(std::cout);
 
 <section>
 <h2>We ♥ Feedback</h2>
-<p><q>Cpp-Taskflow is the cleanest Task API I've ever seen.</q></p>
-<p><q>Cpp-Taskflow has a very simple and elegant tasking interface. The performance also scales very well.</q></p>
+<p><q>Taskflow is the cleanest Task API I've ever seen.</q></p>
+<p><q>Taskflow has a very simple and elegant tasking interface. The performance also scales very well.</q></p>
 <p><q>Best Poster Award in the official CPP Conference, 2018</q></p>
 <p><q>Second Prize of Open Source Software Competition in ACM Multimedia Conference, 2019</q></p>
 </section>
@@ -652,12 +652,12 @@ observer.dump(std::cout);
   <script type="text/template">
 # Thank You
 
-| Without Cpp-Taskflow | With Cpp-Taskflow |
+| Without Taskflow | With Taskflow |
 | :------------------: | :---------------: |
 | ![](image/profile_without_taskflow.gif) | ![](image/profile_with_taskflow.gif) |
 
-<p><i class="fa fa-github"></i><a href="https://github.com/cpp-taskflow/cpp-taskflow">Project GitHub</a></p>
-<p><i class="fa fa-book"></i><a href="https://cpp-taskflow.github.io/cpp-taskflow/index.html">API Documentation</a></p>
+<p><i class="fa fa-github"></i><a href="https://github.com/taskflow/taskflow">Project GitHub</a></p>
+<p><i class="fa fa-book"></i><a href="https://taskflow.github.io/taskflow/index.html">API Documentation</a></p>
   </script>
 </section>
 
