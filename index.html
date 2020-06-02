@@ -591,20 +591,13 @@ executor.run(taskflow).wait();
 
 <section>
 <h2>Monitor Thread Activities</h2>
-<pre><code class="language-cpp stretch" contenteditable=true style="width: 900px">tf::Taskflow taskflow;
-auto observer = executor.make_observer&lt;tf::ExecutorObserver&gt;();
-
-auto [taskA1, taskA2, taskA3] = taskflow.emplace(
-  []() { std::cout &lt;&lt; "Task A1\n"; },
-  []() { std::cout &lt;&lt; "Task A2\n"; },
-  []() { std::cout &lt;&lt; "Task A3\n"; }
-);
-taskA1.precede(taskA2, taskA3);
-
-taskflow.run_n(A, 10).get();
-
-// Dump thread activities to chrome://tracing
-observer.dump(std::cout);
+<pre><code class="language-bash stretch" contenteditable=true style="width: 900px"># visit https://github.com/taskflow/tfprof
+~$ python3 tfprof.py -o output.tfp taskflow-program args
+~$ cat output.tfp
+[ 
+  ...
+]
+# paste the content to https://taskflow.github.io/tfprof/
 </code></pre>
 <span class="fragment current-only" data-code-focus="2,14"></span>
 </section>
