@@ -19,6 +19,10 @@ body {
   color:#fff;
 }
 
+.jumbotron-features {
+  background: #bef1d8;  /* old browsers fallback color*/
+}
+
 .jumbotron-sponsors {
   background: #eff7fa;  /* old browsers fallback color*/
 }
