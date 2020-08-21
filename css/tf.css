@@ -8,7 +8,8 @@ body {
 }
 
 .jumbotron-title {
-  padding: 3rem;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
   background: #000064;  /* old browsers fallback color*/
   background: -webkit-linear-gradient(to left, #1BADD8, #00003E);
   background: linear-gradient(to left, #1BADD8, #00003E);
