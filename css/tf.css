@@ -7,7 +7,7 @@ body {
   padding-top: 3.5rem;
 }
 
-.jumbotron {
+.jumbotron-title {
   padding: 3rem;
   background: #000064;  /* old browsers fallback color*/
   background: -webkit-linear-gradient(to left, #1BADD8, #00003E);
@@ -17,6 +17,11 @@ body {
 
 .hd1{
   color:#fff;
+}
+
+.jumbotron-sponsors {
+  padding: 3rem;
+  background: #eff7fa;  /* old browsers fallback color*/
 }
 
 ul {
