@@ -1,0 +1,35 @@
+html {
+  scroll-behavior: smooth;
+}
+
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+  padding-top: 3.5rem;
+}
+
+.jumbotron {
+  padding: 3rem;
+  background: #000064;  /* old browsers fallback color*/
+  background: -webkit-linear-gradient(to left, #1BADD8, #00003E);
+  background: linear-gradient(to left, #1BADD8, #00003E);
+  color:#fff;
+}
+
+.hd1{
+  color:#fff;
+}
+
+.testimonial_subtitle{
+    color: #0aaa7a;
+    font-size: 12px;
+}
+  .testimonial_btn{
+    background-color: #373d4b !important;
+    color: #fff !important;
+ }
+ .seprator {
+    height: 2px;
+    width: 56px;
+    background-color: #0aaa7a;
+    margin: 7px 0 10px 0;
+}

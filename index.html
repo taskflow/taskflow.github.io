@@ -1,716 +1,393 @@
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon/favicon.ico" type="image/x-icon">
 
-    <title>Taskflow</title>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/black.css" id="theme">
-    
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
-    
-    <script src="https://kit.fontawesome.com/80ba4bf9ef.js" crossorigin="anonymous"></script>
-    
-    <!-- vis.js graph drawing -->
-    <link href="css/vis.min.css" rel="stylesheet" type="text/css"/>
-    <script src="js/vis.min.js"></script>
-  
-  <script type="text/javascript"> 
- function submit() {
-   var content = document.getElementById('code_area').innerText;
-   document.getElementById('flow_graph').style.display = "none";
-   var xhr = new XMLHttpRequest();
-   xhr.onreadystatechange = function () {
-     // readyState = 4 means the post operation is complete.
-     if (xhr.readyState === 4) {
-       // extract the image in response sent by backend
-       var uInt8Array = new Uint8Array(this.response);
-       var i = uInt8Array.length;
-       var binaryString = new Array(i);
-       while (i--) {
-         binaryString[i] = String.fromCharCode(uInt8Array[i]);
-       }
-       var data = binaryString.join('');
-       var base64 = window.btoa(data);
-       document.getElementById('flow_graph').class = "animate-bottom";
-       document.getElementById('flow_graph').style = "border: 0px; background:none";
-       // Replace the old image by new image
-       document.getElementById("flow_graph").src="data:image/png;base64,"+base64;
-     }
-   }
-   // Send a post request to backend
-   xhr.open('post', 'http://localhost:3000', true);
-   xhr.responseType = 'arraybuffer';
-   xhr.setRequestHeader('Content-Type', 'text/plain');
-   xhr.send(content);
- }
-</script>
-    
-    <!-- customized css -->
-    <link rel="stylesheet" href="css/custom.css">
+    <title>Taskflow: A General-purpose Parallel and Heterogeneous Task Programming System</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap/4.4.1/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap/4.4.1/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="css/tf.css">
   </head>
 
   <body>
 
-    <div class="reveal">
-      <div class="slides">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" >
+      <a class="navbar-brand" href="#"><img src="images/logo.png" alt="Logo" style="width:3rem;"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <section>
-          <h1>Taskflow</h1>
-          <h3>Modern C++ Parallel Task Programming</h3>
-          <p><i class="fab fa-github"></i><a href="https://github.com/taskflow/taskflow">Project GitHub</a></p>
-          <p><i class="fas fa-book"></i><a href="https://taskflow.github.io/taskflow/index.html">API Documentation</a></p>
-          <p><i class="fas fa-chart-bar"></i><a href="https://taskflow.github.io/tfprof/">Profiler</a></p>
-          <p><small>Presented by <a href="https://tsung-wei-huang.github.io/">Tsung-Wei Huang</a></small></p>
-        </section>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#tag_news">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tag_features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tag_community">Community</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tag_users">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tag_sponsors">Sponsors</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tag_contact">Contact</a>
+          </li>
+          <!--<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li> -->
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">GitHub</button>
+        </form>
+      </div>
+    </nav>
+
+    <main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-3"><b>Taskflow </b><img src="images/logo.png" alt="Logo" style="width:3rem;"></h1>
+          <blockquote class="blockquote">
+            <p class="mb-0">A General-purpose Parallel and Heterogeneous Task Programming System</p>
+            <footer class="blockquote-footer"><cite style="color:#f5f5f5">write parallel programs with high performance and simultaneous high productivity</cite></footer>
+          </blockquote>
+
+          <p><a class="btn btn-primary btn-lg mr-2" href="https://github.com/taskflow/taskflow" role="button">GitHub &raquo;</a>
+          <a class="btn btn-info btn-lg mr-2" href="https://taskflow.github.io/taskflow/index.html" role="button">Documentation &raquo;</a>
+          <a class="btn btn-warning btn-lg" href="https://taskflow.github.io/taskflow/Releases.html" role="button">Release Notes &raquo;</a></p>
+        </div>
+      </div>
+    
+    </main>
+
+
+
+    <div class="container" id="tag_news">
+
+      <div class="page-header text-center"><h1><i class="far fa-newspaper"></i> News</h1></div>
+      <hr>
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <h2>Taskflow @ CppCon 2020</h2>
+          <p>We are glad Taskflow is accepted by the official 2020 C++ conference as a regular presentation! The presentation title is <q><i>Taskflow: A General-purpose Parallel and Heterogeneous Task Programming System using Modern C++</i></q>.</p>
+          <p align="center"><a href="https://cppcon.org/"><img src="images/cppcon.png" width="50%"></a></p>
+        </div>
+
+        <div class="col-md-4">
+          <h2>Taskflow @ IEEE/ACM ICCAD 2020</h2>
+          <p>We will share our experience of using Taskflow to parallelize CAD in the tutorial session <q><i>GPU Acceleration in CAD: Opportunities and Challenges</i></q> at the 2020 IEEE/ACM International Conference on Computer-aided Design (ICCAD)!</p>
+          <p align="center"><a href="https://cppcon.org/"><img src="images/2020_ICCAD-logo.png" width="50%"></a></p>
+        </div>
         
-<section>
-  <p>How can we make it easier for C++ developers to quickly write parallel programs?</p>
-</section>
+        <div class="col-md-4">
+          <h2>Taskflow @ VLSI-DAT 2020</h2>
+          <p>We gave an invited talk, <q><i>Programming Systems for Parallelizing VLSI CAD and Beyond</i></q>, at the special session of the 2020 VLSI-DAT symposium.</p>
+          <p align="center"><a href="https://expo.itri.org.tw/2020VLSIDAT/Program/SessionView/SpecialSession"><img src="images/vlsidat-logo.png" width="70%"></a></p>
+        </div>
 
-<section>
-  <h2>Want Parallel Code</h2>
-  <ul>
-    <li>Simple</li>
-    <li>Expressive</li>
-    <li>Transparent</li>
-    <li>Performant</li>
-    <li>Productive</li>
-  </ul>
-</section>
-
-<section>
-  <h2>It's NOT Easy Though ...</h2>
-  <ol>
-    <li>Task Dependencies</li>
-    <li>Data Race</li>
-    <li>Concurrency Controls</li>
-    <li>Thread Contention</li>
-    <li>Debugging</li>
-    <li>...</li>
-  </ol>
-</section>
-
-
-<section>
-<h2>A Homegrown Example</h2>
-<img data-src="image/kitchen_flow.png", style="max-width: 400px">
-</section>
-
-
-<section>
-<h2>C++ Thread</h2>
-<pre><code class="language-cpp stretch" contenteditable=true>std::atomic_int garnish_ready{0}; // dependency variable
-std::atomic_int meat_ready{0};    // dependency variable
-std::atomic_int plating_ready{0}; // dependency variable
-std::thread cook1 ([&] () { 
-  garnish = cook_garnish(); garnish_ready = 1; 
-});
-std::thread cook2 ([&] () { 
-  meat = cook_meat(); meat_ready = 1; 
-});
-std::thread chief ([&] () {
-  while(!garnish_ready && !meat_ready);    // spinning
-  plates = plating(garnish, meat); plating_ready = 1;
-}); 
-std::thread waiter1 ([&] () {
-  while(!plating_ready); serve(plates[0]); // spinning
-});
-std::thread waiter2 ([&] () {
-  while(!plating_ready); serve(plates[1]); // spinning
-});
-</code></pre>
-<span class="fragment current-only" data-code-focus="4,7,10,14,17"></span>
-<span class="fragment current-only" data-code-focus="1,2,3"></span>
-<span class="fragment current-only" data-code-focus="11,15,18"></span>
-</section>
-
-<section>
-<h2>OpenMP</h2>
-<pre><code class="language-cpp stretch" contenteditable=true>#pragma omp parallel 
-{
-  #pragma omp single 
-  {
-    int c1c, c2c, cw1, cw2;
-    #pragma omp task depend(out:c1c)
-    garnish = cook_garnish();
-    #pragma omp task depend(out:c2c)
-    meat = cook_meat();
-    #pragma omp task depend(in:c1c,c2c) depend(out:cw1,cw2)
-    plates = plating(garnish, meat);
-    #pragma omp task depend(in:cw1)
-    serve(plates[0]);
-    #pragma omp task depend(in:cw2)
-    serve(plates[1]);
-  }
-}
-</code></pre>
-<span class="fragment current-only" data-code-focus="1,17"></span>
-<span class="fragment current-only" data-code-focus="3,16"></span>
-<span class="fragment current-only" data-code-focus="5"></span>
-<span class="fragment current-only" data-code-focus="6,8,10,12,14"></span>
-</section>
-
-<section>
-<h2>Intel TBB</h2>
-<pre><code class="language-cpp stretch" contenteditable=true>using namespace tbb::flow;
-task_scheduler_init init(default_num_threads());
-graph g;
-
-continue_node&lt;continue_msg&gt; cook1(g, [&amp;] (auto) { garnish = cook_garnish(); });
-continue_node&lt;continue_msg&gt; cook2(g, [&amp;] (auto) { meat = cook_meat(); });
-continue_node&lt;continue_msg&gt; chief(g, [&amp;] (auto) { plates = plating(garnish, meat); });
-continue_node&lt;continue_msg&gt; waiter1(g, [&amp;] (auto) { serve(plates[0]); });
-continue_node&lt;continue_msg&gt; waiter2(g, [&amp;] (auto) { serve(plates[1]); });
-make_edge(cook1, chief); 
-make_edge(cook2, chief); 
-make_edge(chief, waiter1);
-make_edge(chief, waiter2);
-
-cook1.try_put(continue_msg());    // start at cook1
-cook2.try_put(continue_msg());    // start at cook2
-g.wait_for_all();
-</code></pre>
-<span class="fragment current-only" data-code-focus="5,6,7,8,9"></span>
-<span class="fragment current-only" data-code-focus="10,11,12,13"></span>
-<span class="fragment current-only" data-code-focus="15,16"></span>
-<span class="fragment current-only" data-code-focus="17"></span>
-</section>
-
-<section>
-<h2>Taskflow</h2>
-<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow executor;
-tf::Taskflow taskflow;
-
-auto [cook1, cook2, chief, waiter1, waiter2] = 
-  taskflow.emplace(
-  [&amp;] () { garnish = cook_garnish();         },
-  [&amp;] () { meat    = cook_meat();            },
-  [&amp;] () { plates  = plating(garnish, meat); },
-  [&amp;] () { serve(plates[0]);                 },
-  [&amp;] () { serve(plates[1]);                 }
-);
-
-cook1.precede(chief);        // cook1 runs before chief
-cook2.precede(chief);        // cook2 runs before chief
-chief.precede(waiter1);      // chief runs before waiter1
-chief.precede(waiter2);      // chief runs before waiter2
-
-executor.run(tf);
-</code></pre>
-<span class="fragment current-only" data-code-focus="2"></span>
-<span class="fragment current-only" data-code-focus="4-11"></span>
-<span class="fragment current-only" data-code-focus="13-16"></span>
-<span class="fragment current-only" data-code-focus="18"></span>
-</section>
-
-
-
-
-
-<section>
-<h2>Taskflow is FREE</h2>
-<ul>
-  <li>from explicit thread management</li>
-  <li>from difficult lock mechanism</li>
-  <li>from daunting class declaration</li>
-</ul>
-</section>
-        
-<section>
-<h2>Development Cost</h2>
-<small>SLOCCount Report</small>
-<canvas class="stretch" data-chart="bar">
-<!--
-{
-  "data" : {
-    "labels": ["C++ Thread", "OpenMP", "Intel TBB", "Taskflow"],
-    "datasets": [{
-      "label": "$USD (left y-axis)",
-      "yAxisID": "y-axis-0",
-      "data": [538, 444, 585, 283]
-    },{
-      "label": "Lines of Code (right y-axis)",
-      "yAxisID": "y-axis-1",
-      "data": [24, 20, 26, 13]
-    }]
-  },
-  "options": {
-    "title": {
-      "display": false,
-      "text": "SLOCCount Report"
-    },
-    "tooltips": {"mode": "label"},
-    "responsive": true,
-    "scales": {
-      "xAxes": [{
-        "stacked": false
-      }],
-      "yAxes": [{
-        "position": "left",
-        "id": "y-axis-0"
-      },{
-        "position": "right",
-        "id": "y-axis-1"
-      }]
-    }
-  }
-}
--->
-</canvas>
-</section>
-
-<section>
-<h2>What about Performance?</h2>
-</section>
-
-<section>
-  <h2>Graph Algorithm</h2>
-  <small>Runtime Comparison between OpenMP, Intel TBB, and Taskflow</small>
-  <canvas data-chart="line" class="stretch">
-<!--
-{
- "data": {
-  "labels": [2,3287,12987,28768,50973,79683,114367,155455,202419,255888,316493,382928,454704,534483,619460,711298],
-  "datasets":[
-   {
-    "data":[0.896,1.4388,0.872,1.8276,3.3546,4.7556,6.6698,9.3192,11.9644,15.176,18.9224,23.8458,27.312,32.816,38.247,43.4582],
-    "label":"Taskflow",
-    "borderColor":"cyan",
-    "fill": "false"
-   },
-   {
-    "data":[0.0374,1.317,4.2774,9.321,16.9746,25.9622,38.0312,50.3518,64.6332,82.7606,102.973,123.687,149.113,173.564,199.442,230.201],
-    "label":"OpenMP",
-    "borderColor":"lime",
-    "fill": "false"
-   },
-   {
-    "data":[0.2212,0.4682,1.7642,3.8148,6.548,10.9376,15.6766,21.4428,27.5834,35.0644,43.0554,52.0932,61.858,72.6192,83.7176,96.5104],
-    "label":"Intel TBB",
-    "borderColor":"orange",
-    "fill": "false"
-   }
-  ]
- },
- "options": { 
-   "responsive" : "true",
-   "scales": {
-     "xAxes": [{
-       "scaleLabel" : { "display":"true", "labelString": "graph size (|V| + |E| = # tasks)" }
-     }],
-     "yAxes": [{
-       "scaleLabel" : { "display":"true", "labelString": "runtime (ms)" }
-     }]
-   }
- }
-}
--->
-</canvas>
-</section>
-
-
-<section>
-  <h2>Matrix Operation</h2>
-  <small>Runtime Comparison between OpenMP, Intel TBB, and Taskflow</small>
-  <canvas data-chart="line" class="stretch">
-<!--
-{
- "data": {
-  "labels": [16,1296,4624,10000,17424,26896,38416,51984,67600,85264,104976,126736,150544,176400,204304,234256,250000],
-  "datasets":[
-   {
-    "data":[1.9486,0.8256,1.0208,1.865,2.823,4.5788,6.949,9.7488,13.0142,16.6228,19.8972,24.0684,28.415,33.5568,39.9492,44.4578,48.3986],
-    "label":"Taskflow",
-    "borderColor":"cyan",
-    "fill": "false"
-   },
-   {
-    "data":[1.1626,1.5816,4.6282,9.73,16.0318,24.5604,34.532,48.3302,60.3276,75.392,93.6938,113.024,135.142,155.222,180.36,212.705,228.124],
-    "label":"OpenMP",
-    "borderColor":"lime",
-    "fill": "false"
-   },
-   {
-    "data":[0.4102,0.7368,2.3828,4.5974,7.5568,11.3946,16.3492,22.0412,28.5956,35.4474,43.104,52.4276,61.6788,72.2758,83.8262,95.637,102.466],
-    "label":"Intel TBB",
-    "borderColor":"orange",
-    "fill": "false"
-   }
-  ]
- },
- "options": { 
-   "responsive" : "true",
-   "scales": {
-     "xAxes": [{
-       "scaleLabel" : { "display":"true", "labelString": "partition count (# tasks)" }
-     }],
-     "yAxes": [{
-       "scaleLabel" : { "display":"true", "labelString": "runtime (ms)" }
-     }]
-   }
- }
-}
--->
-</canvas>
-</section>
-
-<section>
-  <h2>Real Gain is Tremendous</h2>
-</section>
-
-<section>
-<h2>VLSI Timing Analysis</h2>
-<small>Dev Cost between <a href="https://github.come/OpenTimer/">OpenTimer</a> v1 (OpenMP) and v2 (Taskflow)</small>
-<canvas class="stretch" data-chart="bar">
-<!--
-{
-  "data" : {
-    "labels": ["v1 (OpenMP)", "v2 (Taskflow)"],
-    "datasets": [{
-      "label": "$USD (left y-axis)",
-      "yAxisID": "y-axis-0",
-      "data": [235000, 130000]
-    },{
-      "label": "Lines of Code (right y-axis)",
-      "yAxisID": "y-axis-1",
-      "data": [9123, 4482]
-    }]
-  },
-  "options": {
-    "tooltips": {"mode": "label"},
-    "responsive": true,
-    "scales": {
-      "xAxes": [{
-        "stacked": false
-      }],
-      "yAxes": [{
-        "position": "left",
-        "id": "y-axis-0"
-      },{
-        "position": "right",
-        "id": "y-axis-1"
-      }]
-    }
-  }
-}
--->
-</canvas>
-</section>
-
-<section>
-  <h2>Runtime Performance</h2>
-  <small>OpenTimer v1 (OpenMP) and v2 (Taskflow) </small>
-  <canvas data-chart="line" class="stretch">
-<!--
-{
- "data": {
-  "labels": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
-  "datasets":[
-   {
-    "data":[1292,1335,1369,1525,1320,1346,1366,1391,1448,1393,1259,1192,1238,1220,1471,1404,1419,1220,1225,1245],
-    "label":"v2 (Taskflow)",
-    "borderColor":"cyan",
-    "fill": "false"
-   },
-   {
-    "data":[2853,2957,3058,3032,3007,3052,2925,2898,2822,2854,2757,2963,2832,2834,2716,2777,2538,2612,2592,3176],
-    "label":"v1 (OpenMP)",
-    "borderColor":"lime",
-    "fill": "false"
-   }
-  ]
- },
- "options": { 
-   "responsive" : "true",
-   "scales": {
-     "xAxes": [{
-       "scaleLabel" : { "display":"true", "labelString": "incremental timing iteration" }
-     }],
-     "yAxes": [{
-       "scaleLabel" : { "display":"true", "labelString": "runtime (ms)" }
-     }]
-   }
- }
-}
--->
-</canvas>
-</section>
-
-<section>
-<h2>Parallel Scaling Performance</h2>
-<small>OpenTimer v2 (Taskflow) Runtime across Increasing Numbers of Cores</small>
-<canvas class="stretch" data-chart="bar">
-<!--
-{
-  "data" : {
-    "labels": ["1 core", "2 cores", "3 cores", "4 cores"],
-    "datasets": [{
-      "label": "cpu runtime (ms)",
-      "data": [57, 34, 29, 23]
-    }]
-  },
-  "options": {
-    "tooltips": {"mode": "label"},
-    "responsive": true,
-    "scales": {
-      "xAxes": [{
-        "stacked": false
-      }],
-      "yAxes": [{
-        "position": "left",
-        "id": "y-axis-0"
-      }]
-    }
-  }
-}
--->
-</canvas>
-</section>
-
-
-<section>
-<h2>Dynamic Tasking</h2>
-<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow tf;
-auto A = tf.emplace([](){}).name("A");
-auto C = tf.emplace([](){}).name("C");
-auto D = tf.emplace([](){}).name("D");
-
-auto B = tf.emplace([] (auto&amp; subflow) {
-  auto B0 = subflow.emplace([](){}).name("B0");
-  auto B1 = subflow.emplace([](){}).name("B1");
-  auto B2 = subflow.emplace([](){}).name("B2");
-  auto B3 = subflow.emplace([](){}).name("B3");
-  auto B4 = subflow.emplace([](){}).name("B4");
-  B0.precede(B1, B2, B3);
-  B4.succeed(B1, B2, B3);
-}).name("B");
-            
-A.precede(B);  // B runs after A 
-A.precede(C);  // C runs after A 
-B.precede(D);  // D runs after B 
-C.precede(D);  // D runs after C 
-</code></pre>
-<span class="fragment current-only" data-code-focus="6"></span>
-<span class="fragment current-only" data-code-focus=""></span>
-</section>
-
-<section>
-<!--img src="image/dynamic_tasking.png" style="background:none"-->
-<img src="image/dynamic-tasking.svg" style="background:none">
-</section>
-
-
-<section>
-<h2>Conditional Tasking</h2>
-<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow tf;
-auto A = tf.emplace([](){}).name("A");
-auto B = tf.emplace([](){}).name("B");
-auto C = tf.emplace([](){}).name("C");
-auto D = tf.emplace([](){}).name("D");
-auto E = tf.emplace([](){ return rand()%3; }).name("E");
-auto F = tf.emplace([](){}).name("F");
-
-A.precede(B, C);  // A runs before B and C
-B.precede(D);     // B runs before D
-C.precede(F);     // C runs before F
-D.precede(B);     // D conditions B on 0 (feedback)
-D.precede(D);     // D conditions D on 1 (self-loop)
-D.precede(E);     // D conditions E on 2
-</code></pre>
-<span class="fragment current-only" data-code-focus="6,12-14"></span>
-<span class="fragment current-only" data-code-focus=""></span>
-</section>
-
-<section>
-<img src="image/conditional-tasking.svg" style="background:none">
-</section>
-
-<section>
-<h2>Composability</h2>
-
-<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow A, B;
-auto [taskA1, taskA2, taskA3] = A.emplace(
-  []() { std::cout &lt;&lt; "Task A1\n"; },
-  []() { std::cout &lt;&lt; "Task A2\n"; },
-  []() { std::cout &lt;&lt; "Task A3\n"; }
-);
-taskA1.precede(taskA2, taskA3);
-
-auto [taskB1, taskB2, taskB3] = B.emplace(
-  []() { std::cout &lt;&lt; "Task B1\n"; },
-  []() { std::cout &lt;&lt; "Task B2\n"; },
-  []() { std::cout &lt;&lt; "Task B3\n"; }
-);
-// Compose taskflow B
-auto module_A = B.composed_of(A); 
-taskB1.precede(module_A);
-module_A.precede(taskB2, taskB3);
-</code></pre>
-<span class="fragment current-only" data-code-focus="16"></span>
-</section>
-
-
-<section>
-<img src="image/composable-tasking.svg" style="background:none">
-</section>
-
-<section>
-<h2>Concurrent CPU-GPU Tasking</h2>
-
-<pre><code class="language-cpp stretch" contenteditable=true>tf::Taskflow taskflow;
-tf::Executor executor;
-auto allocate_x = taskflow.emplace(
-  [&](){ cudaMalloc(&dx, N*sizeof(float));}
-);
-auto allocate_y = taskflow.emplace(
-  [&](){ cudaMalloc(&dy, N*sizeof(float));}
-);
-auto cudaflow = taskflow.emplace([&](tf::cudaFlow& cf) {
-  auto h2d_x = cf.copy(dx, hx.data(), N);
-  auto h2d_y = cf.copy(dy, hy.data(), N);
-  auto d2h_x = cf.copy(hx.data(), dx, N);
-  auto d2h_y = cf.copy(hy.data(), dy, N);
-  auto op = cf.kernel(N/256, 256, 0, saxpy, N, 2, dx, dy);
-  op.succeed(h2d_x, h2d_y).precede(d2h_x, d2h_y);
-});
-cudaflow.succeed(allocate_x, allocate_y);
-executor.run(taskflow).wait();
-</code></pre>
-<span class="fragment current-only" data-code-focus="9-16"></span>
-</section>
-
-
-<section>
-<img src="image/cudaFlow.svg" style="background:none">
-</section>
-
-
-<section>
-<h2>Monitor Thread Activities</h2>
-<pre><code class="language-bash stretch" contenteditable=true style="width: 900px"># visit https://github.com/taskflow/tfprof
-~$ python3 tfprof.py -o output.tfp taskflow-program args
-~$ cat output.tfp
-[ 
-  ...
-]
-# paste the content to https://taskflow.github.io/tfprof/
-</code></pre>
-<span class="fragment current-only" data-code-focus="2,14"></span>
-</section>
-
-<section>
-<h2>Taskflow Profiler</h2>
-<h4><a href="https://taskflow.github.io/tfprof/">https://taskflow.github.io/tfprof/</a></h4>
-<a href="https://taskflow.github.io/tfprof/"><img data-src="image/tfprof.png", style="max-height: 80%"></a>
-</section>
-
-
-<section>
-<h2>Drop-in Integration</h2>
-<pre><code class="language-bash stretch" contenteditable=true># clone the newest Taskflow
-~$ git clone https://github.com/taskflow/taskflow.git
-
-# Taskflow is header-only
-~$ cp -r taskflow/taskflow my_project/
-
-# compile you code with g++, clang++, or msvc
-~$ g++ -std=c++17 my_project/test.cpp -pthread
-</code></pre>
-<span class="fragment current-only" data-code-focus="4,5"></span>
-</section>
-
-<section>
-<h2>We ♥ Feedback</h2>
-<p><q>Taskflow is the cleanest Task API I've ever seen.</q></p>
-<p><q>Taskflow has a very simple and elegant tasking interface. The performance also scales very well.</q></p>
-<p><q>Best Poster Award in the official CPP Conference, 2018</q></p>
-<p><q>Second Prize of Open Source Software Competition in ACM Multimedia Conference, 2019</q></p>
-</section>
-
-
-<section>
-<h2>Acknowledgment</h2>
-<ul>
-  <li>Development Team</li>
-  <li>Contributors</li>
-  <li>Sponsors (NSF, DARPA)</li>
-  <li>... and all users!</li>
-</ul>
-</section>
-
-        
-<section data-markdown>
-  <script type="text/template">
-# Thank You
-
-| Without Taskflow | With Taskflow |
-| :------------------: | :---------------: |
-| ![](image/profile_without_taskflow.gif) | ![](image/profile_with_taskflow.gif) |
-
-<p><i class="fab fa-github"></i><a href="https://github.com/taskflow/taskflow">Project GitHub</a></p>
-<p><i class="fas fa-book"></i><a href="https://taskflow.github.io/taskflow/index.html">API Documentation</a></p>
-<p><i class="fas fa-chart-bar"></i><a href="https://taskflow.github.io/tfprof/">Profiler</a></p>
-  </script>
-</section>
 
       </div>
+      
+      <div class="row">
+        
+        <div class="col-md-4">
+          <h2>Taskflow @ ORNL 03/09/20</h2>
+          <p>We visited the Future Technology Group at Oak Ridge National Lab and presented Taskflow to ORNL researchers. The presentation slide is available <a href="https://tsung-wei-huang.github.io/talk/ornl-20.pdf">here</a>.</p>
+          <p align="center"><a href="https://www.ornl.gov/group/ft"><img src="images/ornl.png" width="50%"></a></p>
+        </div>
+
+        <div class="col-md-4">
+          <h2>Software Award @ ACM MM 2019</h2>
+          <p>Taskflow received the Second Prize in the Open Source Software Competition at the 2019 ACM Multimedia Conference! We are grateful for all the effort made by  users and contributors.</p>
+          <p align="center"><a href="https://2019.acmmm.org/"><img src="images/2019_ACMMM-logo.png" width="50%"></a></p>
+        </div>
+        
+        <div class="col-md-4">
+          <h2>Taskflow @ IEEE IPDPS 2019</h2>
+          <p>We presented Taskflow at the 2019 IEEE International Parallel and Distributed Processing Symposium (Session 23: Programming Languages).</p>
+          <p align="center"><a href="https://www.ipdps.org/ipdps2019/2019-advance-program.html"><img src="images/ipdps-2019-logo.jpg" width="50%"></a></p>
+        </div>
+        
+      </div>
+
+      <p align="center"><a class="btn btn-secondary" href="#" role="button">View All News &raquo;</a></p>
+      <br>
+      <hr>
+    </div> <!-- News -->
+    
+    
+    <div class="container" id="tag_features">
+      <div class="page-header text-center"><h1><i class="fas fa-tools"></i> Features</h1></div>
+      <hr>
+
+      <div class="card-deck">
+        <div class="card">
+          <div class="card-body">
+            <p><img class="card-img-top" src="images/static_graph.svg" alt="Card image cap"></p>
+            <h5 class="card-title">Expressive Programming Models</h5>
+            <p class="card-text">Taskflow enables developers to express a broad range of computational patterns using minimal programming effort.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Taskflow lets you master most API in a few minutes.</small>
+          </div>
+        </div>
+      
+        <div class="card">
+          <div class="card-body">
+            <p><img class="card-img-top" src="images/runtime.jpg" alt="Card image cap"></p>
+            <h5 class="card-title">Efficient System Runtimes</h5>
+            <p class="card-text">Taskflow develops a highly efficient system runtime optimized for latency, energy efficiency, and throughput.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Taskflow lets you focus on high-level development.</small>
+          </div>
+        </div>
+      
+        <div class="card">
+          <div class="card-body">
+            <p><img class="card-img-top" src="images/performance.png" alt="Card image cap"></p>
+            <h5 class="card-title">Real Applications</h5>
+            <p class="card-text">Taskflow has demonstrated promising performance in large parallel applications with millions of CPU and GPU tasks.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Taskflow lets you scale to manycore CPUs and GPUs.</small>
+          </div>
+        </div>
+      </div>
+      <br>
+      <hr>
     </div>
+    <!-- features -->
+
+  
+    <div class="container" id="tag_community">
+      <div class="page-header text-center"><h1><i class="fas fa-project-diagram"></i> Community</h1></div>
+
+      <hr>
+
+      <!-- Four columns -->
+      <div class="row">
+        <div class="col-md-6">
+          <h2><i class="fab fa-github"></i> GitHub</h2>
+          <p>Taskflow is open-source on GitHub. Check out the code from <a href="https://github.com/taskflow/taskflow">https://github.com/taskflow/taskflow</a> or download the latest releases.</p>
+        </div>
+        <div class="col-md-6">
+          <div class="align-left"> <i class="icon-chat sev_icon"></i> </div>
+          <h2><i class="fas fa-book"></i> Documentation</h2>
+          <p>Taskflow <a href="https://taskflow.github.io/taskflow/index.html">handbook</a> is the primary resource for understanding features, concepts, and application programming interfance (API).</p>
+        </div>
+      </div>
+
+      <br>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <h2><i class="fas fa-chart-bar"></i> Profiler</h2>
+          <p>Taskflow <a href="https://taskflow.github.io/tfprof/">profiler</a> provides the visualization and tooling you need to profile Taskflow programs on the web.</a>
+        </div>
+        <div class="col-md-6">
+          <h2><i class="fas fa-file-powerpoint"></i> Showcase</h2>
+          <p>Taskflow <a href="https://taskflow.github.io/#/">showcase presentation</a> gives you a quick head start to understand the project motivation and important features.</a>
+        </div>
+      </div>
+
+      <br>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <h2><i class="fas fa-bug"></i> Issue Tracker</h2>
+          <p>Taskflow <a href="https://github.com/taskflow/taskflow/issues">issue tracker</a> lets you report bugs, request new features, or contribute to the project by fixing open issues.</a>
+        </div>
+        <div class="col-md-6">
+          <div class="align-left"> <i class="icon-chat sev_icon"></i> </div>
+          <h2><i class="fas fa-mail-bulk"></i> Mailing List</h2>
+	        <p>Taskflow mailing list (TBD) is the best place to get in contact with the project community and stay up-to-date with new features.</p>
+        </div>
+      </div>
+
+      <br>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <h2><i class="fas fa-quote-right"></i> Research</h2>
+          <p>Taskflow is not just a community project but a research effort to contribute to the excellence of parallel computing by giving a boost to its software ecosystems. We have published our technical details in premier scientific computing conferences:</p>
+          <p> 1. T.-W. Huang, C.-X. Lin, G. Guo, and Martin D. F. Wong, "<a href="papers/ipdps19.pdf">Cpp-Taskflow: Fast Task-based Parallel Programming using Modern C++</a>," IEEE International Parallel and Distributed Processing Symposium (IPDPS), pp. 974-983, Rio de Janeiro, Brazil, 2019.
+          </p>
+        </div>
+      </div>
+    <br>
+    <hr>
+    </div>
+    <!-- community -->
 
 
-    <script src="lib/js/head.min.js"></script>
-    <script src="js/reveal.js"></script>
+    <div class="container" id="tag_users">
+      <div class="page-header text-center"><h1><i class="fas fa-users"></i> Users</h1></div>
+      <hr>
+      <div class="row align-items-center">
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://github.com/OpenTimer/OpenTimer"><img src="images/opentimer.png" style="width: 100%;"></a>
+        </div>
 
-    <script>
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://ossia.io/"><img src="images/ossia.jpg" style="width: 100%;"></a>
+        </div>
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://novuscore.org/"><img src="images/novouscore.png" style="width: 100%;"></a>
+        </div>
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://www.dealii.org/"><img src="images/dealii.png" style="width: 100%;"></a>
+        </div>
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://www.mydatamodels.com/"><img src="images/mydatamodels.jpg" style="width: 100%;"></a>
+        </div>
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://www.vlsisystemdesign.com/"><img src="images/VSD.png" style="width: 100%;"></a>
+        </div>
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://theopenroadproject.org/"><img src="images/openroad.png" style="width: 100%;"></a>
+        </div>
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://github.com/masc-ucsc/livehd"><img src="images/liveHD.png" style="width: 100%;"></a>
+        </div>
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://intsights.com/"><img src="images/PyRepScan.png" style="width: 100%;"></a>
+        </div>
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="http://www.revealtech.ai/"><img src="images/reveal-tech.png" style="width: 100%;"></a>
+        </div>
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://cytonlabs.com/"><img src="images/cytonsys.png" style="width: 100%;"></a>
+        </div>
+        
+        <div class="col-md-1 col-sm-1 vertical-align">
+          <a href="https://github.com/dian-lun-lin/SNIG"><img src="images/snig.png" style="width: 100%;"></a>
+        </div>
 
-      // More info https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        controls: true,
-        progress: true,
-        history: true,
-        center: true,
+      </div>
+      <br>
+      <hr>
+    </div> <!-- users -->
 
-        transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-        chart: {
-          defaults: { 
-            global: { 
-              title: { fontColor: "#FFF" }, 
-              legend: {
-                labels: { fontColor: "#FFF" },
-              },
-            },
-            scale: { 
-              scaleLabel: { fontColor: "#FFF" }, 
-              gridLines: { color: "#FFF", zeroLineColor: "#FFF" }, 
-              ticks: { fontColor: "#FFF" }, 
-            } 
-          },
-          line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
-          bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
-          pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
-          radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
-        },
 
-        // Chart attributes
-        dependencies: [
-          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: 'plugin/highlight/highlight.js' },
-          { src: 'plugin/search/search.js', async: true },
-          { src: 'plugin/zoom-js/zoom.js', async: true },
-          { src: 'plugin/notes/notes.js', async: true },
-          { src: 'plugin/line-numbers/line-numbers.js' },
-          { src: 'plugin/code-focus/reveal-code-focus.js', async: true, callback: function() { RevealCodeFocus(); } },
-          { src: 'plugin/chart/Chart.min.js' },       
-          { src: 'plugin/chart/csv2chart.js', async: false }
-        ]
-      });
-    </script>
 
+    <div class="container" id="tag_sponsors">
+      <div class="page-header text-center"><h1><i class="fas fa-hands-helping"></i> Sponsors</h1></div>
+      <hr>
+      <div class="row align-items-center">
+
+        <div class="col-md-3 col-sm-3 vertical-align">
+          <a href="https://www.ece.utah.edu/"><img src="images/utah-ece-logo.jpg" style="width: 100%;"></a>
+        </div>
+
+        <div class="col-md-3 col-sm-3 vertical-align">
+          <a href="https://www.darpa.mil/"><img src="images/darpa.jpg" style="width: 100%;"></a>
+        </div>
+
+        <div class="col-md-3 col-sm-3 vertical-align">
+          <img src="images/nsf.jpg" style="width: 100%;">
+        </div>
+
+      </div>
+      <hr>
+    </div> <!-- sponsors -->
+
+
+    <div class="container" id="tag_contact">
+      <div class="page-header text-center"><h1><i class="fas fa-envelope-open"></i> Contact</h1></div>
+      <hr>
+
+      <p class="lead" align="center">Schedule a meeting and benefit from our experience in parallel and heterogeneous computing</p>
+      <form action="https://formspree.io/mbjzekzn" method="POST" role="form">
+      <div class="messages"></div>
+      <div class="controls">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="form_name">First Name *</label>
+              <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your first name" required="required" data-error="Firstname is required.">
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="form_lastname">Last Name *</label>
+              <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your last name" required="required" data-error="Lastname is required.">
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="form_email">Email *</label>
+              <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email" required="required" data-error="Valid email is required.">
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="form_message">Message *</label>
+              <textarea id="form_message" name="message" class="form-control" placeholder="Message for me" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <input type="submit" class="btn btn-success btn-send" value="Send message">
+          </div>
+        </div>
+      </div>
+      </form>
+    </div> <!-- contact us-->
+
+
+    <hr>
+    <footer class="container text-center">
+      <p>&copy; <a href="https://tsung-wei-huang.github.io/">Dr. Tsung-Wei Huang</a>, University of Utah 2019-2020</p>
+    </footer>
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
   </body>
 </html>
+
