@@ -412,13 +412,30 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="form_email">Email *</label>
               <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email" required="required" data-error="Valid email is required.">
               <div class="help-block with-errors"></div>
             </div>
           </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="form_need">Please specify your need *</label>
+              <select id="form_need" name="need" class="form-control" required="required" data-error="Please specify your need.">
+                <option value=""></option>
+                <option value="Request to subscribe">Subscribe me to the mailing list</option>
+                <option value="Request to unsubscribe">Unsubscribe me from the mailing list</option>
+                <option value="Request new features">Request new features</option>
+                <option value="Schedule presentation">Schedule a technical presentation</option>
+                <option value="Sponsor taskflow">Sponsor Taskflow (research gift, donation, consulting, etc.)</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
+
+
         </div>
         <div class="row">
           <div class="col-md-12">
