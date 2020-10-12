@@ -1,20 +1,20 @@
 const news = [
   {
-    title: "Taskflow @ ICPADS 20",
+    title: "Taskflow @ ICPADS 2020",
     image_src: "images/icpads.png",
     image_url: "https://icpads2020.comp.polyu.edu.hk/",
     content: `Our work-stealing scheduling algorithm, <q>An Efficient Work-stealing Scheduler for Task Dependency Graph</q>, is accepted by 2020 IEEE International Conference on Parallel and Distributed Systems (ICPADS).`,
     footer: "Last updated on 2020/10/11"
   },
   {
-    title: "Taskflow @ ICCAD 20",
+    title: "Taskflow @ ICCAD 2020",
     image_src: "images/2020_ICCAD-logo.jpg",
     image_url: "https://iccad.com/",
     content: `We will share our experience of using Taskflow to parallelize CAD in the tutorial session <q><a href="https://iccad.com/event_details?id=305-12-D">GPU Acceleration in CAD: Opportunities and Challenges</a></q> at the 2020 IEEE/ACM International Conference on Computer-aided Design (ICCAD)!`,
     footer: "Last updated on 2020/10/01"
   },
   {
-    title: "Taskflow @ WOSET 20",
+    title: "Taskflow @ WOSET 2020",
     image_src: "images/woset20.png",
     image_url: "https://woset-workshop.github.io/",
     content: `We are presenting Taskflow at the 2020 Workshop of Open-source EDA Technology (WOSET) co-located with the International Conference on Computer-aided Design (ICCAD)!`,
