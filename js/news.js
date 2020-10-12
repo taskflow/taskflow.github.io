@@ -38,7 +38,7 @@ const news = [
     title: "Taskflow @ Cpp-India 2020",
     image_src: "images/cpp-india-20.jpg",
     image_url: "https://www.cppindia.co.in/",
-    content: `We are presenting Taskflow to the C++ group in India (Cpp-India). Please join the event, <q><a href="https://www.cppindia.co.in/TechTalk/2020/">Parallel Programming in Modern C++</a></q>, on Sat, 11:30 AM, IST.`,
+    content: `We are presenting Taskflow to the C++ group in India (Cpp-India). Please join the event, <q><a href="https://www.cppindia.co.in/TechTalk/2020/">Parallel Programming in Modern C++</a></q>, on Sat, Oct 10, 11:30 AM, IST.`,
     footer: "Last updated on 2020/09/21"
   },
   {
