@@ -6,7 +6,7 @@ function makeCard(item) {
   return `\
 <div class="card">\
 <div class="card-body">\
-<p><a href="${item.image_url}"><img class="card-img-top" src="${item.image_src}" alt="iccad"></a></p>\
+<p><a href="${item.image_url}"><img class="card-img-top" src="${item.image_src}"></a></p>\
 <h5 class="card-title">${item.title}</h5>\
 <p class="card-text">${item.content}</p>\
 </div>\
