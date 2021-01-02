@@ -4,7 +4,7 @@ const news = [
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
     content: `We have release Taskflow v3.0! This new release largely enhanced the core functionalities and heterogeneous tasking! Please check out the <a href="https://taskflow.github.io/taskflow/release-3-0-0.html">release notes</a>.`,
-    footer: "Last updated on 2020/01/01"
+    footer: "Last updated on 2021/01/01"
   },
   {
     title: "Taskflow @ ICPADS 2020",
