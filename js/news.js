@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow joins NumFocus",
+    image_src: "images/NumFocus.png",
+    image_url: "https://numfocus.org/sponsored-projects/affiliated-projects",
+    content: `Taskflow joins NumFocus as an affiliated project! We will continue to promote open practices in research, data, and scientific computing with NumFocus.`,
+    footer: "Last updated on 2021/02/07"
+  },
+  {
     title: "Taskflow v3.0 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
