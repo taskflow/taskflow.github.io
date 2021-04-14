@@ -1,5 +1,19 @@
 const news = [
   {
+    title: "Taskflow @ C++Now 2021",
+    image_src: "images/cppnow-logo.png",
+    image_url: "https://cppnow.org/announcements/2022/12/announcing-cpp-now-2021/",
+    content: `We are presenting Taskflow at the C++Now Conference online on 5/7/21! Please check out our presentation, <q>Taskflow: A Lightweight Heterogeneous Task Graph Programming System with Control Flow</q>.`,
+    footer: "Last updated on 2021/04/14"
+  },
+  {
+    title: "Taskflow v3.1 released",
+    image_src: "images/release.png",
+    image_url: "https://taskflow.github.io/taskflow/Releases.html",
+    content: `We have release Taskflow v3.1! This release introduces a new syclFlow model to program SYCL kernels using task graph parallelism. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-1-0.html">release notes</a>.`,
+    footer: "Last updated on 2021/04/14"
+  },
+  {
     title: "Taskflow joins NumFocus",
     image_src: "images/NumFocus.png",
     image_url: "https://numfocus.org/sponsored-projects/affiliated-projects",
