@@ -1,9 +1,16 @@
 const news = [
   {
+    title: "Taskflow @ EuroPar 2021",
+    image_src: "images/europar-2021-logo.png",
+    image_url: "https://2021.euro-par.org/",
+    content: `We are presenting our GPU tasking interface and algorithm at the 2021 Euro-Par Conference! Please check out our presentation, <q>Efficient GPU Computation using Task Graph Parallelism</q>, in the main program.`,
+    footer: "Last updated on 2021/04/30"
+  },
+  {
     title: "Taskflow @ C++Now 2021",
     image_src: "images/cppnow-logo.png",
     image_url: "https://cppnow.org/announcements/2022/12/announcing-cpp-now-2021/",
-    content: `We are presenting Taskflow at the C++Now Conference online on 5/7/21! Please check out our presentation, <q>Taskflow: A Lightweight Heterogeneous Task Graph Programming System with Control Flow</q>.`,
+    content: `We are presenting Taskflow at the C++Now Conference online on 5/7/21! Please check out our presentation, <q><a href="https://sched.co/hhlb">Taskflow: A Lightweight Heterogeneous Task Graph Programming System with Control Flow</a></q>.`,
     footer: "Last updated on 2021/04/14"
   },
   {
