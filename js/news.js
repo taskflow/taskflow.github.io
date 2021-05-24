@@ -1,9 +1,9 @@
 const news = [
   {
-    title: "Taskflow received NumFOCUS Gift",
+    title: "Taskflow received NumFOCUS Grant",
     image_src: "images/NumFocus.png",
     image_url: "https://numfocus.org/sponsored-projects/affiliated-projects",
-    content: `Thank you, NumFOCUS, for supporting Taskflow with Small Development Grant! We willcontinue to promote open, accessible, and reproducible code for scientific research.`,
+    content: `Thank you, NumFOCUS, for supporting Taskflow with Small Development Grant! We will continue to promote open, accessible, and reproducible code for scientific research.`,
     footer: "Last updated on 2021/05/24"
   },
   {
