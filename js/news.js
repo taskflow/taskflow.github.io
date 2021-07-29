@@ -1,9 +1,23 @@
 const news = [
   {
+    title: "Taskflow v3.2 released",
+    image_src: "images/release.png",
+    image_url: "https://taskflow.github.io/taskflow/Releases.html",
+    content: `We have release Taskflow v3.2! This release introduces many GPU algorithms atop cudaFlow. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-2-0.html">release notes</a>.`,
+    footer: "Last updated on 2021/07/29"
+  },
+  {
+    title: "Taskflow received NSF Grant",
+    image_src: "images/nsf.png",
+    image_url: "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2126672",
+    content: `Thank you, NSF, for supporting Taskflow with a research Grant to advance VLSI CAD applications!`,
+    footer: "Last updated on 2021/07/21"
+  },
+  {
     title: "Taskflow received NumFOCUS Grant",
     image_src: "images/NumFocus.png",
     image_url: "https://numfocus.org/sponsored-projects/affiliated-projects",
-    content: `Thank you, NumFOCUS, for supporting Taskflow with Small Development Grant! We will continue to promote open, accessible, and reproducible code for scientific research.`,
+    content: `Thank you, NumFOCUS, for supporting Taskflow with Small Development Grant (2021-r1)! We will continue to promote open-source software for scientific research.`,
     footer: "Last updated on 2021/05/24"
   },
   {
