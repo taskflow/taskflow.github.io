@@ -1,5 +1,19 @@
 const news = [
   {
+    title: "Taskflow @ IXPUG 2021",
+    image_src: "images/ixpug-logo.jpeg",
+    image_url: "https://www.ixpug.org/ixpug-2021",
+    content: `We are presenting <q><a href="https://www.ixpug.org/ixpug-2021">A General-Purpose Parallel and Heterogeneous Task Programming System Using Modern C++</a></q> in the 2021 Intel Extreme Performance Users Group (IXPUG).`,
+    footer: "Last updated on 2021/10/15"
+  },
+  {
+    title: "Taskflow @ CppCon 2021",
+    image_src: "images/cppcon.png",
+    image_url: "https://cppcon.org/",
+    content: `We are presenting <q><a href="https://cppcon2021.sched.com/event/nvAk?iframe=no">cudaFlow: A Modern C++ Programming Model for GPU Task Graph Parallelism</a></q> in the 2021 C++ Conference (CppCon).`,
+    footer: "Last updated on 2021/10/10"
+  },
+  {
     title: "Taskflow accepted by IEEE TPDS",
     image_src: "images/tpds.png",
     image_url: "https://tsung-wei-huang.github.io/papers/tpds21-taskflow.pdf",
@@ -122,7 +136,7 @@ const news = [
     title: "Taskflow @ CppCon 2020",
     image_src: "images/cppcon.png",
     image_url: "https://cppcon.org/",
-    content: `We are glad Taskflow is accepted by the official 2020 C++ conference as a regular presentation! The presentation title is <q><a href="https://sched.co/e79y">Taskflow: A General-purpose Parallel and Heterogeneous Task Programming System using Modern C++</q>.`,
+    content: `We are glad Taskflow is accepted by the official 2020 C++ conference as a regular presentation! The presentation title is <q><a href="https://sched.co/e79y">Taskflow: A General-purpose Parallel and Heterogeneous Task Programming System using Modern C++</a></q>.`,
     footer: "Last updated on 2020/08/12"
   },
   {
