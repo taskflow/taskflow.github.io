@@ -17,7 +17,7 @@ const news = [
     title: "Taskflow accepted by IEEE TPDS",
     image_src: "images/tpds.png",
     image_url: "https://tsung-wei-huang.github.io/papers/tpds21-taskflow.pdf",
-    content: `Taskflow is accepted by IEEE Transactions on Parallel and Distributed Systems (TPDS)! Please check out the <a href="https://tsung-wei-huang.github.io/papers/tpds21-taskflow.pdf">pre-print</a>.`,
+    content: `Taskflow is accepted by IEEE Transactions on Parallel and Distributed Systems (TPDS)! Please check out the <a href="https://tsung-wei-huang.github.io/papers/tpds21-taskflow.pdf">paper</a>.`,
     footer: "Last updated on 2021/08/06"
   },
   {
