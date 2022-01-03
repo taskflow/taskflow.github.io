@@ -1,5 +1,19 @@
 const news = [
   {
+    title: "Taskflow v3.3 released",
+    image_src: "images/release.png",
+    image_url: "https://taskflow.github.io/taskflow/Releases.html",
+    content: `We have release Taskflow v3.3! This release has sanitized out the data-race issues and introduced a new pipeline programming model. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-3-0.html">release notes</a>.`,
+    footer: "Last updated on 2022/01/03"
+  },
+  {
+    title: "cudaFlow accepted by IEEE TPDS",
+    image_src: "images/tpds.png",
+    image_url: "https://ieeexplore.ieee.org/document/9664223",
+    content: `cudaFlow is accepted by IEEE Transactions on Parallel and Distributed Systems (TPDS)! Please check out the <a href="https://ieeexplore.ieee.org/document/9664223">paper</a>.`,
+    footer: "Last updated on 2022/01/01"
+  },
+  {
     title: "Taskflow @ IXPUG 2021",
     image_src: "images/ixpug-logo.jpeg",
     image_url: "https://www.ixpug.org/ixpug-2021",
