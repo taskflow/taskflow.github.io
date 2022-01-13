@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow Received NSF CAREER Award",
+    image_src: "images/nsf.png",
+    image_url: "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2144523",
+    content: `Thank you, NSF, for supporting Taskflow with the prestigious CAREER Award to advance scientific computing!`,
+    footer: "Last updated on 2022/01/13"
+  },
+  {
     title: "Taskflow @ IXPUG 2021",
     image_src: "images/ixpug-logo.jpeg",
     image_url: "https://www.ixpug.org/ixpug-2021",
@@ -21,21 +28,21 @@ const news = [
     footer: "Last updated on 2021/08/06"
   },
   {
-    title: "Taskflow v3.2 released",
+    title: "Taskflow v3.2 Released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
     content: `We have release Taskflow v3.2! This release introduces many GPU algorithms atop cudaFlow. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-2-0.html">release notes</a>.`,
     footer: "Last updated on 2021/07/29"
   },
   {
-    title: "Taskflow received NSF Grant",
+    title: "Taskflow Received NSF Grant",
     image_src: "images/nsf.png",
     image_url: "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2126672",
     content: `Thank you, NSF, for supporting Taskflow with a research Grant to advance VLSI CAD applications!`,
     footer: "Last updated on 2021/07/21"
   },
   {
-    title: "Taskflow received NumFOCUS Grant",
+    title: "Taskflow Received NumFOCUS Grant",
     image_src: "images/NumFocus.png",
     image_url: "https://numfocus.org/sponsored-projects/affiliated-projects",
     content: `Thank you, NumFOCUS, for supporting Taskflow with Small Development Grant (2021-r1)! We will continue to promote open-source software for scientific research.`,
@@ -56,21 +63,21 @@ const news = [
     footer: "Last updated on 2021/04/14"
   },
   {
-    title: "Taskflow v3.1 released",
+    title: "Taskflow v3.1 Released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
     content: `We have release Taskflow v3.1! This release introduces a new syclFlow model to program SYCL kernels using task graph parallelism. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-1-0.html">release notes</a>.`,
     footer: "Last updated on 2021/04/14"
   },
   {
-    title: "Taskflow joins NumFocus",
+    title: "Taskflow Joins NumFocus",
     image_src: "images/NumFocus.png",
     image_url: "https://numfocus.org/sponsored-projects/affiliated-projects",
     content: `Taskflow joins NumFocus as an affiliated project! We will continue to promote open practices in research, data, and scientific computing with NumFocus.`,
     footer: "Last updated on 2021/02/07"
   },
   {
-    title: "Taskflow v3.0 released",
+    title: "Taskflow v3.0 Released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
     content: `We have release Taskflow v3.0! This new release largely enhanced the core functionalities and heterogeneous tasking! Please check out the <a href="https://taskflow.github.io/taskflow/release-3-0-0.html">release notes</a>.`,
