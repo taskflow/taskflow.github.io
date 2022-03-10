@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow @ GSoC 2022",
+    image_src: "images/gsoc.png",
+    image_url: "https://github.com/taskflow/GSoC2022",
+    content: `Taskflow is selected by Google Summer of Code (GSoc) 2022 under the NumFOCUS umbrella. Please check out our <a href="https://github.com/taskflow/GSoC2022">idea list</a> and apply through <a href="https://numfocus.org/programs/google-summer-code">NumFOCUS</a>!`,
+    footer: "Last updated on 2022/03/10"
+  },
+  {
     title: "Taskflow Received NSF CAREER Award",
     image_src: "images/nsf.png",
     image_url: "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2144523",
