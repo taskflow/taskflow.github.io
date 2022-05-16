@@ -1,5 +1,19 @@
 const news = [
   {
+    title: "Taskflow @ HPDC 2022",
+    image_src: "images/hpdc2022-logo.jpeg",
+    image_url: "https://www.hpdc.org/2022/",
+    content: `Taskflow is accepted by ACM 2022 High-performance Parallel and Distributed Computing (HPDC) Symposium! Please check out our <a href="https://arxiv.org/abs/2202.00717">paper</a>.`,
+    footer: "Last updated on 2022/05/01"
+  },
+  {
+    title: "Taskflow @ DAC 2022",
+    image_src: "images/dac2022-logo.png",
+    image_url: "https://www.dac.com/",
+    content: `Taskflow is accepted by IEEE/ACM 2022 Design Automation Conference! Please check out our <a href="https://tsung-wei-huang.github.io/papers/dac2022.pdf">paper</a>.`,
+    footer: "Last updated on 2022/05/01"
+  },
+  {
     title: "Taskflow @ GSoC 2022",
     image_src: "images/gsoc.png",
     image_url: "https://github.com/taskflow/GSoC2022",
