@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow v3.4 released",
+    image_src: "images/release.png",
+    image_url: "https://taskflow.github.io/taskflow/Releases.html",
+    content: `We have release Taskflow v3.4! This release has enhanced the pipeline programming model and the core execution methods. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-4-0.html">release notes</a>.`,
+    footer: "Last updated on 2022/05/23"
+  },
+  {
     title: "Taskflow @ HPDC 2022",
     image_src: "images/hpdc2022-logo.jpeg",
     image_url: "https://www.hpdc.org/2022/",
@@ -10,21 +17,21 @@ const news = [
     title: "Taskflow @ DAC 2022",
     image_src: "images/dac2022-logo.png",
     image_url: "https://www.dac.com/",
-    content: `Taskflow is accepted by IEEE/ACM 2022 Design Automation Conference! Please check out our <a href="https://tsung-wei-huang.github.io/papers/dac2022.pdf">paper</a>.`,
+    content: `Taskflow is accepted by IEEE/ACM 2022 Design Automation Conference! Please check out our <a href="https://tsung-wei-huang.github.io/papers/dac2022.pdf">paper</a> of speeding up timing analysis using Taskflow pipeline.`,
     footer: "Last updated on 2022/05/01"
   },
   {
     title: "Taskflow @ GSoC 2022",
     image_src: "images/gsoc.png",
     image_url: "https://github.com/taskflow/GSoC2022",
-    content: `Taskflow is selected by Google Summer of Code (GSoc) 2022 under the NumFOCUS umbrella. Please check out our <a href="https://github.com/taskflow/GSoC2022">idea list</a> and apply through <a href="https://numfocus.org/programs/google-summer-code">NumFOCUS</a>!`,
+    content: `Taskflow is selected by Google Summer of Code (GSoc) 2022 under the NumFOCUS umbrella. Please check out our <a href="https://github.com/taskflow/GSoC2022">idea list</a> and apply through <a href="https://numfocus.org/programs/google-summer-code">NumFOCUS</a>! (<a href="https://summerofcode.withgoogle.com/programs/2022/projects/FgTgRVLt">see accepted applicant</a>)`,
     footer: "Last updated on 2022/03/10"
   },
   {
-    title: "Taskflow Received NSF CAREER Award",
+    title: "Taskflow Received Prestigious NSF CAREER Award",
     image_src: "images/nsf.png",
     image_url: "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2144523",
-    content: `Thank you, NSF, for supporting Taskflow with the prestigious CAREER Award to advance scientific computing!`,
+    content: `Thank you, NSF, for supporting Taskflow with the prestigious CAREER Award to advance scientific computing! Please check out our <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2144523">award abstract</a>.`,
     footer: "Last updated on 2022/01/13"
   },
   {
@@ -73,7 +80,7 @@ const news = [
     title: "Taskflow Received NSF Grant",
     image_src: "images/nsf.png",
     image_url: "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2126672",
-    content: `Thank you, NSF, for supporting Taskflow with a research Grant to advance VLSI CAD applications!`,
+    content: `Thank you, NSF, for supporting Taskflow to advance VLSI CAD applications! Please check out our <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2126672">award abstract</a>.`,
     footer: "Last updated on 2021/07/21"
   },
   {
