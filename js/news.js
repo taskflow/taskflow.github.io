@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow @ Game Development",
+    image_src: "images/3D_graphics_rendering_cookbook.jpeg",
+    image_url: "https://www.packtpub.com/product/3d-graphics-rendering-cookbook/9781838986193",
+    content: `Taskflow is highlighted by the <a href="https://www.packtpub.com/product/3d-graphics-rendering-cookbook/9781838986193">3D Graphics Rendering Cookbook</a> for multithreading (Chapter 2: Multithreading with Taskflow). Thank you, Sergey Kosarevsky and Viktor Latypov!`,
+    footer: "Last updated on 2022/05/23"
+  },
+  {
     title: "Taskflow v3.4 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
