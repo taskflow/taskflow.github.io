@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow @ ICPP",
+    image_src: "images/icpp-logo.png",
+    image_url: "https://icpp22.gitlabpages.inria.fr/prog",
+    content: `We have successfully used Taskflow to accelerate RTL simulation problem in a CPU-GPU heterogeneous computing environment. Results are accepted by 2022 ACM ICPP (<a href="https://icpp22.gitlabpages.inria.fr/prog/">accepted paper list</a>)!`,
+    footer: "Last updated on 2022/06/30"
+  },
+  {
     title: "Taskflow @ Game Development",
     image_src: "images/3D_graphics_rendering_cookbook.jpeg",
     image_url: "https://www.packtpub.com/product/3d-graphics-rendering-cookbook/9781838986193",
