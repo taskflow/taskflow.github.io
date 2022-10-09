@@ -1,5 +1,22 @@
 const news = [
   {
+    title: "Taskflow Received NSF POSE Award",
+    image_src: "images/nsf.png",
+    image_url: "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2229304",
+    content: `Thank you, NSF, for supporting Taskflow with the new NSF POSE Award to advance quantum computing, multimedia, and CAD using task parallelism! Please check out our <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2229304">award abstract</a>.`,
+    footer: "Last updated on 2022/10/01"
+  },
+  {
+    title: "Taskflow v3.3 released",
+    image_src: "images/release.png",
+    image_url: "https://taskflow.github.io/taskflow/Releases.html",
+    content: `We have release Taskflow v3.3! This release has sanitized out the data-race issues and introduced a new pipeline programming model. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-3-0.html">release notes</a>.`,
+    footer: "Last updated on 2022/01/03"
+  },
+  {
+    title: "cudaFlow accepted by IEEE TPDS",
+    image_src: "images/tpds.png",
+  {
     title: "Taskflow @ ICPP",
     image_src: "images/icpp-logo.png",
     image_url: "https://icpp22.gitlabpages.inria.fr/prog",
