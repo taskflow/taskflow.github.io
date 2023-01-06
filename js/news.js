@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow v3.5 released",
+    image_src: "images/release.png",
+    image_url: "https://taskflow.github.io/taskflow/Releases.html",
+    content: `We have release Taskflow v3.5! This release has largely improved the scheduling performance and its energy efficiency. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-5-0.html">release notes</a>.`,
+    footer: "Last updated on 2023/01/05"
+  },
+  {
     title: "Taskflow Received NSF POSE Award",
     image_src: "images/nsf.png",
     image_url: "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2229304",
