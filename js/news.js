@@ -1,5 +1,26 @@
 const news = [
   {
+    title: "Taskflow won the Innovation Award of 2023 HPEC Graph Challenge",
+    image_src: "images/hpec-gc20.png",
+    image_url: "http://graphchallenge.mit.edu/champions",
+    content: `Our Taskflow-powered graph partitioning algorithm, <q><i>uSAP: An Ultra-Fast Stochastic Graph Partitioner,</i></q> received the <a href="http://graphchallenge.mit.edu/champions">Innovation Award</a> of the 2023 IEEE/MIT/Amazon HPEC Stochastic Block Partition Challenge.`,
+    footer: "Last updated on 2023/10/01"
+  },
+  {
+    title: "Taskflow@DAC'23",
+    image_src: "images/2023-DAC-logo.png",
+    image_url: "https://60dac.conference-program.com/presentation/?id=TUT109&sess=sess180",
+    content: `We are giving a technical tutorial of Taskflow at 2023 DAC! Please check out the <a href="https://60dac.conference-program.com/presentation/?id=TUT109&sess=sess180">program schedule</a> and join us to learn how Taskflow advances EDA applications.`,
+    footer: "Last updated on 2023/07/01"
+  },
+  {
+    title: "Taskflow@IPDPS'23",
+    image_src: "images/2023-IPDPS-logo.jpeg",
+    image_url: "https://www.ipdps.org/ipdps2023/2023-advance-program.html",
+    content: `We are giving a technical talk for Taskflow-powered quantum circuit simulation at 2023 IPDPS, as well as a panel at <a href="https://hcw-ipdps.org/">HCW</a> to discuss Taskflow in heterogeneity! Please check out the <a href="https://www.ipdps.org/ipdps2023/2023-advance-program.html">program schedule</a>.`,
+    footer: "Last updated on 2023/05/16"
+  },
+  {
     title: "Taskflow v3.6 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
@@ -19,6 +40,13 @@ const news = [
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
     content: `We have release Taskflow v3.5! This release has largely improved the scheduling performance and its energy efficiency. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-5-0.html">release notes</a>.`,
     footer: "Last updated on 2023/01/05"
+  },
+  {
+    title: "Taskflow@PACT'22",
+    image_src: "images/pact-logo.png",
+    image_url: "https://pact22.cs.illinois.edu/tutorials.html#tut1-2",
+    content: `We are giving a technical talk of Taskflow at the SYCL workshop at 2022 PACT. Please check out the <a href="https://pact22.cs.illinois.edu/tutorials.html#tut1-2">program schedule</a> and join us if you plan to attend PACT.`,
+    footer: "Last updated on 2022/10/01"
   },
   {
     title: "Taskflow Received NSF POSE Award",
