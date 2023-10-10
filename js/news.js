@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow@ICCAD'23",
+    image_src: "images/2023-iccad-logo.png",
+    image_url: "https://2023.iccad.com/",
+    content: `We are organizing a special session at 2023 IEEE/ACM ICCAD to present the newest dynamic task graph parallelism in Taskflow! Please check out the <a href="https://2023.iccad.com/2023-program-at-a-glance">program schedule</a> and join us if you plan to attend ICCAD.`,
+    footer: "Last updated on 2023/10/10"
+  },
+  {
     title: "Taskflow won the Innovation Award of 2023 HPEC Graph Challenge",
     image_src: "images/hpec-gc20.png",
     image_url: "http://graphchallenge.mit.edu/champions",
