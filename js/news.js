@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow@HPC-Asia'24",
+    image_src: "images/hpc-asia-23-logo.png",
+    image_url: "https://sighpc.ipsj.or.jp/HPCAsia2024/",
+    content: `We will present our task-parallel pipeline programming interface at the 2024 ACM International Conference on High-performance Computing in Asia-Pacific Region (HPC-Asia)! Please check out the <a href="https://sighpc.ipsj.or.jp/HPCAsia2024/">program schedule</a> and join us if you plan to attend HPC-Asia.`,
+    footer: "Last updated on 2023/11/20"
+  },
+  {
     title: "Taskflow@ICCAD'23",
     image_src: "images/2023-iccad-logo.png",
     image_url: "https://2023.iccad.com/",
