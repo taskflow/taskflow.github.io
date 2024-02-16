@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow@WAMTA'24",
+    image_src: "images/2024-wamta.png",
+    image_url: "https://wamta24.icl.utk.edu/",
+    content: `We will present our Taskflow system at the 2024 Workshop on Asynchronous Many-task Systems and Applications in Knoxville, Tennessee!`,
+    footer: "Last updated on 2024/02/14"
+  },
+  {
     title: "Taskflow@HPC-Asia'24",
     image_src: "images/hpc-asia-23-logo.png",
     image_url: "https://sighpc.ipsj.or.jp/HPCAsia2024/",
