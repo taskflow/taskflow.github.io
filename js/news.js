@@ -1,5 +1,19 @@
 const news = [
   {
+    title: "Taskflow v3.7 released",
+    image_src: "images/release.png",
+    image_url: "https://taskflow.github.io/taskflow/Releases.html",
+    content: `We have release Taskflow v3.7! This release enables exception support and improves the scheduling performance of AsyncTask using C++20 atomic synchronization primitive. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-7-0.html">release notes</a>.`,
+    footer: "Last updated on 2024/05/07"
+  },
+  {
+    title: "Taskflow @ GSoC 2024",
+    image_src: "images/gsoc.png",
+    image_url: "https://github.com/taskflow/GSoC2024",
+    content: `Taskflow is selected by Google Summer of Code (GSoc) 2024 under the NumFOCUS umbrella. Please check out our <a href="https://summerofcode.withgoogle.com/programs/2024/organizations/numfocus">idea list</a> and apply through <a href="https://github.com/numfocus/gsoc/blob/master/CONTRIBUTING-students.md">NumFOCUS</a>!`,
+    footer: "Last updated on 2024/03/05"
+  },
+  {
     title: "Taskflow@WAMTA'24",
     image_src: "images/2024-wamta.png",
     image_url: "https://wamta24.icl.utk.edu/",
