@@ -510,8 +510,8 @@ C.precede(D);  // D runs after C
 auto A = tf.emplace([](){}).name("A");
 auto B = tf.emplace([](){}).name("B");
 auto C = tf.emplace([](){}).name("C");
-auto D = tf.emplace([](){}).name("D");
-auto E = tf.emplace([](){ return rand()%3; }).name("E");
+auto D = tf.emplace([](){ return rand()%3; }).name("D");
+auto E = tf.emplace([](){}).name("E");
 auto F = tf.emplace([](){}).name("F");
 
 A.precede(B, C);  // A runs before B and C
