@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow @ ICPP'24",
+    image_src: "images/icpp-logo.png",
+    image_url: "https://icpp22.gitlabpages.inria.fr/prog",
+    content: `We have successfully used Taskflow to accelerate graph partitioning problem and quantum circuit simulation workloads, published in 2024 ACM ICPP (<a href="https://icpp2024.org/index.php?option=com_content&view=article&id=6&Itemid=114">see technical program</a>)!`,
+    footer: "Last updated on 2024/08/12"
+  },
+  {
     title: "Taskflow v3.7 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
