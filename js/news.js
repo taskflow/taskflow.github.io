@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow won the 2nd place in 2025 FCPC@PPoPP",
+    image_src: "images/2025-PPoPP-FCPC-second-place.png",
+    image_url: "https://fastcode.org/events/fastcode-challenge/spe4ic/",
+    content: `Our Taskflow-powered parallel breadth-first search (BFS) algorithm won the Second Place (out of 46 registered teams) in 2025 PPoPP Fast Code Programming Challenge (FCPC)!`,
+    footer: "Last updated on 2025/03/02"
+  },
+  {
     title: "Taskflow v3.9 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
