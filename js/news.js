@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow contributed to C++26 std::exec",
+    image_src: "images/stdexec.png",
+    image_url: "https://github.com/NVIDIA/stdexec/tree/main/include/execpools",
+    content: `Taskflow's executor has contributed to Nvidia's implementation of C++26 <a href="https://github.com/NVIDIA/stdexec/tree/main/include/execpools">std::exec</a> library! We are eager to see millions of C++ developers benefiting from using Taskflow!`,
+    footer: "Last updated on 2025/05/12"
+  },
+  {
     title: "Taskflow v3.10 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
