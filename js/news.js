@@ -1,5 +1,19 @@
 const news = [
   {
+    title: "Taskflow at CppCon 2025",
+    image_src: "images/2025-CppCon-AsyncTask.png",
+    image_url: "https://cppcon2025.sched.com/event/27bR8/dynamic-asynchronous-tasking-with-dependencies",
+    content: `We presented the dynamic task graph programming interface of Taskflow at 2025 CppCon!`,
+    footer: "Last updated on 2025/09/19"
+  },
+  {
+    title: "Taskflow won the Best Poster Award at CppCon'25",
+    image_src: "images/2025-CppCon-Poster-Award.png",
+    image_url: "https://cppcon.org/",
+    content: `Taskflow won the best poster award at 2025 CppCon!`,
+    footer: "Last updated on 2025/09/19"
+  },
+  {
     title: "Taskflow contributed to C++26 std::exec",
     image_src: "images/stdexec.png",
     image_url: "https://github.com/NVIDIA/stdexec/tree/main/include/execpools",
