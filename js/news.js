@@ -1,5 +1,12 @@
 const news = [
   {
+    title: "Taskflow v4.0 released",
+    image_src: "images/release.png",
+    image_url: "https://taskflow.github.io/taskflow/Releases.html",
+    content: `We have release Taskflow v4! Please check out the <a href="https://taskflow.github.io/taskflow/release-4-0-0.html">release notes</a>.`,
+    footer: "Last updated on 2026/01/01"
+  },
+  {
     title: "Taskflow at CppCon 2025",
     image_src: "images/2025-CppCon-AsyncTask.png",
     image_url: "https://cppcon2025.sched.com/event/27bR8/dynamic-asynchronous-tasking-with-dependencies",
