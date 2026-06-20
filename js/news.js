@@ -1,9 +1,23 @@
 const news = [
   {
+    title: "Taskflow v4.1 released",
+    image_src: "images/release.png",
+    image_url: "https://taskflow.github.io/taskflow/Releases.html",
+    content: `We have released Taskflow v4.1! Please check out the <a href="https://taskflow.github.io/taskflow/release-4-1-0.html">release notes</a>.`,
+    footer: "Last updated on 2026/06/19"
+  },
+  {
+    title: "Taskflow @ C++Now 2026",
+    image_src: "images/cppnow-logo.png",
+    image_url: "https://schedule.cppnow.org/session/2026/multi-priority-graph-based-parallel-execution-using-taskflow/",
+    content: `We are excited to see a Taskflow talk at the 2026 C++Now Conference! <q><a href="https://schedule.cppnow.org/session/2026/multi-priority-graph-based-parallel-execution-using-taskflow/">Multi-Priority Graph-Based Parallel Execution Using Taskflow</a> by Yun Kai at Bloomberg</q>.`,
+    footer: "Last updated on 2021/05/01"
+  },
+  {
     title: "Taskflow v4.0 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v4! Please check out the <a href="https://taskflow.github.io/taskflow/release-4-0-0.html">release notes</a>.`,
+    content: `We have released Taskflow v4! Please check out the <a href="https://taskflow.github.io/taskflow/release-4-0-0.html">release notes</a>.`,
     footer: "Last updated on 2026/01/01"
   },
   {
@@ -31,7 +45,7 @@ const news = [
     title: "Taskflow v3.10 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.10! Please check out the <a href="https://taskflow.github.io/taskflow/release-3-10-0.html">release notes</a>.`,
+    content: `We have released Taskflow v3.10! Please check out the <a href="https://taskflow.github.io/taskflow/release-3-10-0.html">release notes</a>.`,
     footer: "Last updated on 2025/05/01"
   },
   {
@@ -45,14 +59,14 @@ const news = [
     title: "Taskflow v3.9 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.9! Please check out the <a href="https://taskflow.github.io/taskflow/release-3-9-0.html">release notes</a>. Happy new year to all users!`,
+    content: `We have released Taskflow v3.9! Please check out the <a href="https://taskflow.github.io/taskflow/release-3-9-0.html">release notes</a>. Happy new year to all users!`,
     footer: "Last updated on 2025/01/02"
   },
   {
     title: "Taskflow v3.8 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.8! Please check out the <a href="https://taskflow.github.io/taskflow/release-3-8-0.html">release notes</a>.`,
+    content: `We have released Taskflow v3.8! Please check out the <a href="https://taskflow.github.io/taskflow/release-3-8-0.html">release notes</a>.`,
     footer: "Last updated on 2024/10/02"
   },
   {
@@ -66,7 +80,7 @@ const news = [
     title: "Taskflow v3.7 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.7! This release enables exception support and improves the scheduling performance of AsyncTask using C++20 atomic synchronization primitive. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-7-0.html">release notes</a>.`,
+    content: `We have released Taskflow v3.7! This release enables exception support and improves the scheduling performance of AsyncTask using C++20 atomic synchronization primitive. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-7-0.html">release notes</a>.`,
     footer: "Last updated on 2024/05/07"
   },
   {
@@ -122,7 +136,7 @@ const news = [
     title: "Taskflow v3.6 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.6! This release introduces a new dynamic task graph creation model and improves many parallel algorithm performance. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-6-0.html">release notes</a>.`,
+    content: `We have released Taskflow v3.6! This release introduces a new dynamic task graph creation model and improves many parallel algorithm performance. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-6-0.html">release notes</a>.`,
     footer: "Last updated on 2023/05/08"
   },
   {
@@ -136,7 +150,7 @@ const news = [
     title: "Taskflow v3.5 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.5! This release has largely improved the scheduling performance and its energy efficiency. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-5-0.html">release notes</a>.`,
+    content: `We have released Taskflow v3.5! This release has largely improved the scheduling performance and its energy efficiency. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-5-0.html">release notes</a>.`,
     footer: "Last updated on 2023/01/05"
   },
   {
@@ -171,7 +185,7 @@ const news = [
     title: "Taskflow v3.4 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.4! This release has enhanced the pipeline programming model and the core execution methods. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-4-0.html">release notes</a>.`,
+    content: `We have released Taskflow v3.4! This release has enhanced the pipeline programming model and the core execution methods. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-4-0.html">release notes</a>.`,
     footer: "Last updated on 2022/05/23"
   },
   {
@@ -206,7 +220,7 @@ const news = [
     title: "Taskflow v3.3 released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.3! This release has sanitized out the data-race issues and introduced a new pipeline programming model. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-3-0.html">release notes</a>.`,
+    content: `We have released Taskflow v3.3! This release has sanitized out the data-race issues and introduced a new pipeline programming model. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-3-0.html">release notes</a>.`,
     footer: "Last updated on 2022/01/03"
   },
   {
@@ -241,7 +255,7 @@ const news = [
     title: "Taskflow v3.2 Released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.2! This release introduces many GPU algorithms atop cudaFlow. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-2-0.html">release notes</a>.`,
+    content: `We have released Taskflow v3.2! This release introduces many GPU algorithms atop cudaFlow. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-2-0.html">release notes</a>.`,
     footer: "Last updated on 2021/07/29"
   },
   {
@@ -276,7 +290,7 @@ const news = [
     title: "Taskflow v3.1 Released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.1! This release introduces a new syclFlow model to program SYCL kernels using task graph parallelism. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-1-0.html">release notes</a>.`,
+    content: `We have released Taskflow v3.1! This release introduces a new syclFlow model to program SYCL kernels using task graph parallelism. Please check out the <a href="https://taskflow.github.io/taskflow/release-3-1-0.html">release notes</a>.`,
     footer: "Last updated on 2021/04/14"
   },
   {
@@ -290,7 +304,7 @@ const news = [
     title: "Taskflow v3.0 Released",
     image_src: "images/release.png",
     image_url: "https://taskflow.github.io/taskflow/Releases.html",
-    content: `We have release Taskflow v3.0! This new release largely enhanced the core functionalities and heterogeneous tasking! Please check out the <a href="https://taskflow.github.io/taskflow/release-3-0-0.html">release notes</a>.`,
+    content: `We have released Taskflow v3.0! This new release largely enhanced the core functionalities and heterogeneous tasking! Please check out the <a href="https://taskflow.github.io/taskflow/release-3-0-0.html">release notes</a>.`,
     footer: "Last updated on 2021/01/01"
   },
   {
